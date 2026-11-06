@@ -1,3 +1,4 @@
+
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
@@ -13,23 +14,19 @@ import Card from '../components/Card';
 import Badge from '../components/Badge';
 import Button from '../components/Button';
 
-const EXERCISES = [
-  { id: '1', name: 'PUSH-UPS', sets: '3 SETS', reps: '12 REPS' },
-  { id: '2', name: 'SQUATS', sets: '3 SETS', reps: '15 REPS' },
-  { id: '3', name: 'PLANK', sets: '3 SETS', reps: '30 SEC' },
-  { id: '4', name: 'LUNGES', sets: '3 SETS', reps: '12 REPS' },
-];
-
 export default function WorkoutDetailsScreen() {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const workout = route.params?.workout || {
-    title: 'FULL BODY',
-    category: 'STRENGTH',
-    duration: '45 MIN',
-    level: 'INTERMEDIATE',
-  };
+  const workout = route.params?.workout || {};
+
+  const title = workout.title || workout.name || 'WORKOUT';
+  const category = workout.category || 'GENERAL';
+  const level = workout.level || 'BEGINNER';
+  const duration = workout.durationLabel ||
+    (workout.duration ? `${workout.duration} MIN` : '—');
+
+  const exercises = workout.exercises || [];
 
   const startWorkout = () => {
     navigation.navigate('ActiveWorkout', { workout });
@@ -42,13 +39,13 @@ export default function WorkoutDetailsScreen() {
       showsVerticalScrollIndicator={false}
     >
       <Header
-        title={workout.title}
+        title={title}
         subtitle="WORKOUT DETAILS"
       />
 
       <Card style={styles.summary}>
         <View style={styles.summaryTop}>
-          <Badge title={workout.level} />
+          <Badge title={level} />
 
           <View style={styles.readyBadge}>
             <View style={styles.readyDot} />
@@ -59,12 +56,13 @@ export default function WorkoutDetailsScreen() {
         <Text style={styles.heroEyebrow}>YOUR NEXT CHALLENGE</Text>
 
         <Text style={styles.workoutTitle}>
-          {workout.title}
+          {title}
           <Text style={styles.titleAccent}>.</Text>
         </Text>
 
         <Text style={styles.description}>
-          A complete workout designed to build strength and endurance.
+          {workout.description ||
+            'A complete workout designed to build strength and endurance.'}
         </Text>
 
         <View style={styles.summaryDivider} />
@@ -72,7 +70,7 @@ export default function WorkoutDetailsScreen() {
         <View style={styles.infoRow}>
           <View style={styles.infoBlock}>
             <Text style={styles.infoLabel}>DURATION</Text>
-            <Text style={styles.infoValue}>{workout.duration}</Text>
+            <Text style={styles.infoValue}>{duration}</Text>
           </View>
 
           <View style={styles.infoSeparator} />
@@ -80,7 +78,7 @@ export default function WorkoutDetailsScreen() {
           <View style={styles.infoBlock}>
             <Text style={styles.infoLabel}>EXERCISES</Text>
             <Text style={styles.infoValue}>
-              {EXERCISES.length}
+              {exercises.length}
             </Text>
           </View>
 
@@ -89,7 +87,7 @@ export default function WorkoutDetailsScreen() {
           <View style={styles.infoBlock}>
             <Text style={styles.infoLabel}>CATEGORY</Text>
             <Text style={styles.infoValueSmall}>
-              {workout.category}
+              {category}
             </Text>
           </View>
         </View>
@@ -106,34 +104,56 @@ export default function WorkoutDetailsScreen() {
         </View>
 
         <Text style={styles.exerciseCount}>
-          0{EXERCISES.length} MOVES
+          {String(exercises.length).padStart(2, '0')} MOVES
         </Text>
       </View>
 
       <View style={styles.list}>
-        {EXERCISES.map((exercise, index) => (
-          <Card key={exercise.id} style={styles.exercise}>
-            <View style={styles.exerciseNumber}>
-              <Text style={styles.number}>
-                {String(index + 1).padStart(2, '0')}
-              </Text>
-            </View>
+        {exercises.length > 0 ? (
+          exercises.map((exercise, index) => (
+            <Card
+              key={exercise.id || `${exercise.name}-${index}`}
+              style={styles.exercise}
+            >
+              <View style={styles.exerciseNumber}>
+                <Text style={styles.number}>
+                  {String(index + 1).padStart(2, '0')}
+                </Text>
+              </View>
 
-            <View style={styles.exerciseInfo}>
-              <Text style={styles.exerciseName}>
-                {exercise.name}
-              </Text>
+              <View style={styles.exerciseInfo}>
+                <Text style={styles.exerciseName}>
+                  {exercise.name || exercise.title || 'EXERCISE'}
+                </Text>
 
-              <Text style={styles.exerciseMeta}>
-                {exercise.sets}  •  {exercise.reps}
-              </Text>
-            </View>
+                <Text style={styles.exerciseMeta}>
+                  {exercise.sets != null
+                    ? `${exercise.sets} SETS`
+                    : ''}
+                  {exercise.sets != null && exercise.reps != null
+                    ? '  •  '
+                    : ''}
+                  {exercise.reps != null
+                    ? `${exercise.reps} REPS`
+                    : ''}
+                  {exercise.duration != null
+                    ? `  •  ${exercise.duration} SEC`
+                    : ''}
+                </Text>
+              </View>
 
-            <View style={styles.exerciseArrow}>
-              <Text style={styles.arrow}>↗</Text>
-            </View>
+              <View style={styles.exerciseArrow}>
+                <Text style={styles.arrow}>↗</Text>
+              </View>
+            </Card>
+          ))
+        ) : (
+          <Card style={styles.emptyCard}>
+            <Text style={styles.emptyText}>
+              У этой тренировки пока нет списка упражнений.
+            </Text>
           </Card>
-        ))}
+        )}
       </View>
 
       <View style={styles.bottomActions}>
@@ -340,6 +360,13 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
     fontSize: 17,
     fontWeight: '900',
+  },
+  emptyCard: {
+    padding: SPACING.lg,
+  },
+  emptyText: {
+    color: COLORS.textSecondary,
+    fontSize: TYPOGRAPHY.body,
   },
   bottomActions: {
     gap: SPACING.xs,

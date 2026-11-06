@@ -1,10 +1,12 @@
-import { useState, useCallback } from 'react';
+
+import { useCallback } from 'react';
 import {
   ScrollView,
   View,
   Text,
   StyleSheet,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import {
   useNavigation,
@@ -21,73 +23,59 @@ import {
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
-import { getWorkouts } from '../services/workoutStorage';
+import useWorkoutStore from '../store/useWorkoutStore';
 
-const WORKOUTS = [
-  {
-    id: '1',
-    title: 'FULL BODY',
-    category: 'STRENGTH',
-    duration: '45 MIN',
-    level: 'INTERMEDIATE',
-    number: '01',
-    accent: '#B7FF36',
-  },
-  {
-    id: '2',
-    title: 'UPPER BODY',
-    category: 'MUSCLE',
-    duration: '35 MIN',
-    level: 'BEGINNER',
-    number: '02',
-    accent: '#70D9A0',
-  },
-  {
-    id: '3',
-    title: 'CARDIO BLAST',
-    category: 'CARDIO',
-    duration: '25 MIN',
-    level: 'ADVANCED',
-    number: '03',
-    accent: '#FFB45E',
-  },
-  {
-    id: '4',
-    title: 'LEG DAY',
-    category: 'STRENGTH',
-    duration: '50 MIN',
-    level: 'INTERMEDIATE',
-    number: '04',
-    accent: '#9EABFF',
-  },
-];
+const CATEGORY_ACCENTS = {
+  'Силовая': '#B7FF36',
+  'Кардио': '#FFB45E',
+  'Йога': '#9EABFF',
+  'Растяжка': '#70D9A0',
+  'Пилатес': '#D6A5FF',
+  'Функциональная': '#70D9A0',
+};
 
 export default function WorkoutsScreen() {
   const navigation = useNavigation();
-  const [completedWorkouts, setCompletedWorkouts] = useState([]);
+
+  const workouts = useWorkoutStore((state) => state.workouts);
+  const isLoading = useWorkoutStore((state) => state.isLoading);
+  const error = useWorkoutStore((state) => state.error);
+  const loadWorkouts = useWorkoutStore((state) => state.loadWorkouts);
+  const clearError = useWorkoutStore((state) => state.clearError);
 
   useFocusEffect(
     useCallback(() => {
-      let active = true;
-
-      async function loadHistory() {
-        const data = await getWorkouts();
-
-        if (active) {
-          setCompletedWorkouts(data.reverse().slice(0, 5));
-        }
-      }
-
-      loadHistory();
-
-      return () => {
-        active = false;
-      };
-    }, [])
+      loadWorkouts();
+    }, [loadWorkouts])
   );
 
+  const completedWorkouts = [...workouts]
+    .filter((workout) => workout.status === 'completed')
+    .sort((a, b) => {
+      const dateA = new Date(
+        a.statusHistory?.findLast?.(
+          (item) => item.status === 'completed'
+        )?.date || a.createdAt
+      );
+
+      const dateB = new Date(
+        b.statusHistory?.findLast?.(
+          (item) => item.status === 'completed'
+        )?.date || b.createdAt
+      );
+
+      return dateB - dateA;
+    })
+    .slice(0, 5);
+
   const openWorkout = (workout) => {
-    navigation.navigate('WorkoutDetails', { workout });
+    navigation.navigate('WorkoutDetails', {
+      workout: {
+        ...workout,
+        title: workout.name,
+        durationLabel: `${workout.duration} MIN`,
+      },
+    });
   };
 
   return (
@@ -117,65 +105,89 @@ export default function WorkoutsScreen() {
         </Text>
       </View>
 
-      <View style={styles.list}>
-        {WORKOUTS.map((workout) => (
+      {isLoading && workouts.length === 0 ? (
+        <View style={styles.loading}>
+          <ActivityIndicator color={COLORS.primary} size="large" />
+          <Text style={styles.emptyText}>LOADING WORKOUTS...</Text>
+        </View>
+      ) : error ? (
+        <Card style={styles.historyCard}>
+          <Text style={styles.emptyTitle}>LOADING ERROR</Text>
+          <Text style={styles.emptyText}>{error}</Text>
           <Pressable
-            key={workout.id}
-            onPress={() => openWorkout(workout)}
-            style={({ pressed }) => [
-              styles.pressable,
-              pressed && styles.pressed,
-            ]}
+            onPress={() => {
+              clearError();
+              loadWorkouts();
+            }}
           >
-            <Card style={styles.workoutCard}>
-              <View
-                style={[
-                  styles.accentBar,
-                  { backgroundColor: workout.accent },
-                ]}
-              />
-
-              <View style={styles.cardContent}>
-                <View style={styles.topRow}>
-                  <Badge title={workout.category} />
-
-                  <Text style={styles.number}>
-                    {workout.number}
-                  </Text>
-                </View>
-
-                <Text style={styles.title}>
-                  {workout.title}
-                </Text>
-
-                <View style={styles.bottomRow}>
-                  <View style={styles.metaGroup}>
-                    <View style={styles.metaItem}>
-                      <Text style={styles.metaLabel}>DURATION</Text>
-                      <Text style={styles.duration}>
-                        {workout.duration}
-                      </Text>
-                    </View>
-
-                    <View style={styles.metaDivider} />
-
-                    <View style={styles.metaItem}>
-                      <Text style={styles.metaLabel}>LEVEL</Text>
-                      <Text style={styles.level}>
-                        {workout.level}
-                      </Text>
-                    </View>
-                  </View>
-
-                  <View style={styles.arrowCircle}>
-                    <Text style={styles.arrow}>↗</Text>
-                  </View>
-                </View>
-              </View>
-            </Card>
+            <Text style={styles.retryText}>TRY AGAIN</Text>
           </Pressable>
-        ))}
-      </View>
+        </Card>
+      ) : (
+        <View style={styles.list}>
+          {workouts.map((workout, index) => (
+            <Pressable
+              key={workout.id}
+              onPress={() => openWorkout(workout)}
+              style={({ pressed }) => [
+                styles.pressable,
+                pressed && styles.pressed,
+              ]}
+            >
+              <Card style={styles.workoutCard}>
+                <View
+                  style={[
+                    styles.accentBar,
+                    {
+                      backgroundColor:
+                        CATEGORY_ACCENTS[workout.category] ||
+                        COLORS.primary,
+                    },
+                  ]}
+                />
+
+                <View style={styles.cardContent}>
+                  <View style={styles.topRow}>
+                    <Badge title={workout.category.toUpperCase()} />
+
+                    <Text style={styles.number}>
+                      {String(index + 1).padStart(2, '0')}
+                    </Text>
+                  </View>
+
+                  <Text style={styles.title}>
+                    {workout.name.toUpperCase()}
+                  </Text>
+
+                  <View style={styles.bottomRow}>
+                    <View style={styles.metaGroup}>
+                      <View style={styles.metaItem}>
+                        <Text style={styles.metaLabel}>DURATION</Text>
+                        <Text style={styles.duration}>
+                          {workout.duration} MIN
+                        </Text>
+                      </View>
+
+                      <View style={styles.metaDivider} />
+
+                      <View style={styles.metaItem}>
+                        <Text style={styles.metaLabel}>LEVEL</Text>
+                        <Text style={styles.level}>
+                          {workout.level.toUpperCase()}
+                        </Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.arrowCircle}>
+                      <Text style={styles.arrow}>↗</Text>
+                    </View>
+                  </View>
+                </View>
+              </Card>
+            </Pressable>
+          ))}
+        </View>
+      )}
 
       <View style={styles.historySection}>
         <View style={styles.historyHeader}>
@@ -213,48 +225,52 @@ export default function WorkoutsScreen() {
           </Card>
         ) : (
           <View style={styles.historyList}>
-            {completedWorkouts.map((workout, index) => (
-              <Card
-                key={`${workout.completedAt}-${index}`}
-                style={styles.historyCard}
-              >
-                <View style={styles.historyRow}>
-                  <View style={styles.historyNumber}>
-                    <Text style={styles.historyNumberText}>
-                      {String(index + 1).padStart(2, '0')}
+            {completedWorkouts.map((workout, index) => {
+              const completion = [...(workout.statusHistory || [])]
+                .reverse()
+                .find((item) => item.status === 'completed');
+
+              return (
+                <Card
+                  key={workout.id}
+                  style={styles.historyCard}
+                >
+                  <View style={styles.historyRow}>
+                    <View style={styles.historyNumber}>
+                      <Text style={styles.historyNumberText}>
+                        {String(index + 1).padStart(2, '0')}
+                      </Text>
+                    </View>
+
+                    <View style={styles.historyInfo}>
+                      <Text style={styles.historyTitle}>
+                        {workout.name}
+                      </Text>
+
+                      <Text style={styles.historyCategory}>
+                        {workout.category.toUpperCase()}
+                      </Text>
+                    </View>
+
+                    <Text style={styles.historyDuration}>
+                      {workout.duration} MIN
                     </Text>
                   </View>
 
-                  <View style={styles.historyInfo}>
-                    <Text style={styles.historyTitle}>
-                      {workout.title}
+                  <View style={styles.historyFooter}>
+                    <Text style={styles.historyDate}>
+                      {completion?.date
+                        ? new Date(completion.date).toLocaleDateString()
+                        : ''}
                     </Text>
 
-                    <Text style={styles.historyCategory}>
-                      {workout.category || 'WORKOUT'}
+                    <Text style={styles.completedLabel}>
+                      COMPLETED
                     </Text>
                   </View>
-
-                  <Text style={styles.historyDuration}>
-                    {Math.floor(
-                      (workout.durationSeconds || 0) / 60
-                    )} MIN
-                  </Text>
-                </View>
-
-                <View style={styles.historyFooter}>
-                  <Text style={styles.historyDate}>
-                    {workout.completedAt
-                      ? new Date(workout.completedAt).toLocaleDateString()
-                      : ''}
-                  </Text>
-
-                  <Text style={styles.completedLabel}>
-                    COMPLETED
-                  </Text>
-                </View>
-              </Card>
-            ))}
+                </Card>
+              );
+            })}
           </View>
         )}
       </View>
@@ -515,5 +531,15 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontWeight: '900',
     letterSpacing: 1,
+  },
+  loading: {
+    alignItems: 'center',
+    padding: SPACING.xxl,
+    gap: SPACING.md,
+  },
+  retryText: {
+    color: COLORS.primary,
+    fontWeight: '900',
+    marginTop: SPACING.md,
   },
 });
