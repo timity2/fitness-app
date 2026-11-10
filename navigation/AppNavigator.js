@@ -9,6 +9,7 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
 import WorkoutsScreen from '../screens/WorkoutsScreen';
 import WorkoutDetailsScreen from '../screens/WorkoutDetailsScreen';
+import WorkoutFormScreen from '../screens/WorkoutFormScreen';
 import ActiveWorkoutScreen from '../screens/ActiveWorkoutScreen';
 import StatsScreen from '../screens/StatsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -102,6 +103,7 @@ export default function AppNavigator() {
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="Main" component={MainTabs} />
         <Stack.Screen name="WorkoutDetails" component={WorkoutDetailsScreen} />
+        <Stack.Screen name="WorkoutForm" component={WorkoutFormScreen} />
         <Stack.Screen name="ActiveWorkout" component={ActiveWorkoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>

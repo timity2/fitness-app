@@ -6,13 +6,19 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { COLORS, SPACING } from '../../constants/theme';
+import {
+  COLORS,
+  SPACING,
+  RADIUS,
+  SHADOWS,
+} from '../../constants/theme';
 
 export default function AppCard({
   children,
   onPress,
   style,
   padding = SPACING.lg,
+  disabled = false,
 }) {
   const cardStyle = [
     styles.card,
@@ -24,9 +30,13 @@ export default function AppCard({
     return (
       <Pressable
         onPress={onPress}
+        disabled={disabled}
+        accessibilityRole="button"
+        accessibilityState={{ disabled }}
         style={({ pressed }) => [
           cardStyle,
-          pressed && styles.pressed,
+          pressed && !disabled && styles.pressed,
+          disabled && styles.disabled,
         ]}
       >
         {children}
@@ -44,20 +54,20 @@ export default function AppCard({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: COLORS.surface,
-    borderRadius: 16,
+    borderRadius: RADIUS.lg,
     borderWidth: 1,
-    borderColor: '#252525',
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-    elevation: 4,
+    borderColor: COLORS.border,
+    shadowColor: SHADOWS.card.shadowColor,
+    shadowOffset: SHADOWS.card.shadowOffset,
+    shadowOpacity: SHADOWS.card.shadowOpacity,
+    shadowRadius: SHADOWS.card.shadowRadius,
+    elevation: SHADOWS.card.elevation,
   },
   pressed: {
     opacity: 0.85,
     transform: [{ scale: 0.99 }],
+  },
+  disabled: {
+    opacity: 0.5,
   },
 });

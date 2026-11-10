@@ -8,7 +8,12 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../../constants/theme';
+import {
+  COLORS,
+  SPACING,
+  TYPOGRAPHY,
+  RADIUS,
+} from '../../constants/theme';
 
 export default function AppInput({
   label,
@@ -21,21 +26,28 @@ export default function AppInput({
   keyboardType = 'default',
   multiline = false,
   numberOfLines = 1,
+  containerStyle,
+  inputContainerStyle,
+  inputStyle,
+  labelStyle,
+  errorStyle,
   ...restProps
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const borderColor = error
-    ? (COLORS.error || '#FF5252')
+    ? COLORS.error
     : isFocused
       ? COLORS.primary
-      : '#333333';
+      : COLORS.border;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {label ? (
-        <Text style={styles.label}>{label}</Text>
+        <Text style={[styles.label, labelStyle]}>
+          {label}
+        </Text>
       ) : null}
 
       <View
@@ -43,16 +55,21 @@ export default function AppInput({
           styles.inputContainer,
           { borderColor },
           multiline && styles.multilineContainer,
+          inputContainerStyle,
         ]}
       >
-        {icon ? <View style={styles.icon}>{icon}</View> : null}
+        {icon ? (
+          <View style={styles.icon}>
+            {icon}
+          </View>
+        ) : null}
 
         <TextInput
           {...restProps}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          placeholderTextColor={COLORS.textSecondary}
+          placeholderTextColor={COLORS.muted}
           keyboardType={keyboardType}
           multiline={multiline}
           numberOfLines={multiline ? numberOfLines : 1}
@@ -68,6 +85,7 @@ export default function AppInput({
           style={[
             styles.input,
             multiline && styles.multilineInput,
+            inputStyle,
           ]}
           textAlignVertical={multiline ? 'top' : 'center'}
         />
@@ -78,7 +96,7 @@ export default function AppInput({
             style={styles.passwordToggle}
             accessibilityRole="button"
             accessibilityLabel={
-              isPasswordVisible ? 'Hide password' : 'Show password'
+              isPasswordVisible ? 'Скрыть пароль' : 'Показать пароль'
             }
           >
             <Text style={styles.eye}>
@@ -89,7 +107,9 @@ export default function AppInput({
       </View>
 
       {error ? (
-        <Text style={styles.error}>{error}</Text>
+        <Text style={[styles.error, errorStyle]}>
+          {error}
+        </Text>
       ) : null}
     </View>
   );
@@ -98,13 +118,13 @@ export default function AppInput({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    gap: 7,
+    gap: SPACING.xs + 3,
   },
   label: {
-    color: COLORS.text,
-    fontSize: 12,
+    color: COLORS.textSecondary,
+    fontSize: TYPOGRAPHY.small,
     fontWeight: '800',
-    letterSpacing: 1,
+    letterSpacing: 0.8,
   },
   inputContainer: {
     minHeight: 52,
@@ -112,38 +132,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.surface,
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: RADIUS.md,
     paddingHorizontal: SPACING.md,
   },
   multilineContainer: {
     minHeight: 110,
     alignItems: 'flex-start',
-    paddingVertical: 12,
+    paddingVertical: SPACING.sm + 4,
   },
   input: {
     flex: 1,
     color: COLORS.text,
     fontSize: TYPOGRAPHY.body,
-    paddingVertical: 12,
+    paddingVertical: SPACING.sm + 4,
   },
   multilineInput: {
     minHeight: 85,
     textAlignVertical: 'top',
   },
   icon: {
-    marginRight: 10,
+    marginRight: SPACING.sm + 2,
   },
   passwordToggle: {
-    padding: 8,
-    marginLeft: 6,
+    padding: SPACING.sm,
+    marginLeft: SPACING.xs,
   },
   eye: {
     color: COLORS.textSecondary,
     fontSize: 20,
   },
   error: {
-    color: COLORS.error || '#FF5252',
-    fontSize: 11,
+    color: COLORS.error,
+    fontSize: TYPOGRAPHY.small - 1,
     fontWeight: '600',
   },
 });

@@ -23,6 +23,8 @@ import {
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
+import StatusBadge from '../components/ui/StatusBadge';
+import AppButton from '../components/ui/AppButton';
 import useWorkoutStore from '../store/useWorkoutStore';
 
 const CATEGORY_ACCENTS = {
@@ -53,15 +55,17 @@ export default function WorkoutsScreen() {
     .filter((workout) => workout.status === 'completed')
     .sort((a, b) => {
       const dateA = new Date(
-        a.statusHistory?.findLast?.(
-          (item) => item.status === 'completed'
-        )?.date || a.createdAt
+        [...(a.statusHistory || [])]
+          .reverse()
+          .find((item) => item.status === 'completed')?.date ||
+          a.createdAt
       );
 
       const dateB = new Date(
-        b.statusHistory?.findLast?.(
-          (item) => item.status === 'completed'
-        )?.date || b.createdAt
+        [...(b.statusHistory || [])]
+          .reverse()
+          .find((item) => item.status === 'completed')?.date ||
+          b.createdAt
       );
 
       return dateB - dateA;
@@ -76,6 +80,10 @@ export default function WorkoutsScreen() {
         durationLabel: `${workout.duration} MIN`,
       },
     });
+  };
+
+  const openCreateWorkout = () => {
+    navigation.navigate('WorkoutForm');
   };
 
   return (
@@ -103,6 +111,14 @@ export default function WorkoutsScreen() {
         <Text style={styles.description}>
           Find your next challenge. Push harder. Get stronger.
         </Text>
+
+        <AppButton
+          title="+ ADD WORKOUT"
+          onPress={openCreateWorkout}
+          variant="primary"
+          size="md"
+          style={styles.addButton}
+        />
       </View>
 
       {isLoading && workouts.length === 0 ? (
@@ -114,6 +130,7 @@ export default function WorkoutsScreen() {
         <Card style={styles.historyCard}>
           <Text style={styles.emptyTitle}>LOADING ERROR</Text>
           <Text style={styles.emptyText}>{error}</Text>
+
           <Pressable
             onPress={() => {
               clearError();
@@ -148,7 +165,12 @@ export default function WorkoutsScreen() {
 
                 <View style={styles.cardContent}>
                   <View style={styles.topRow}>
-                    <Badge title={workout.category.toUpperCase()} />
+                    <View style={styles.badgesGroup}>
+                      <Badge
+                        title={(workout.category || 'Тренировка').toUpperCase()}
+                      />
+                      <StatusBadge status={workout.status} />
+                    </View>
 
                     <Text style={styles.number}>
                       {String(index + 1).padStart(2, '0')}
@@ -156,7 +178,7 @@ export default function WorkoutsScreen() {
                   </View>
 
                   <Text style={styles.title}>
-                    {workout.name.toUpperCase()}
+                    {(workout.name || 'Без названия').toUpperCase()}
                   </Text>
 
                   <View style={styles.bottomRow}>
@@ -173,7 +195,7 @@ export default function WorkoutsScreen() {
                       <View style={styles.metaItem}>
                         <Text style={styles.metaLabel}>LEVEL</Text>
                         <Text style={styles.level}>
-                          {workout.level.toUpperCase()}
+                          {(workout.level || '—').toUpperCase()}
                         </Text>
                       </View>
                     </View>
@@ -248,7 +270,7 @@ export default function WorkoutsScreen() {
                       </Text>
 
                       <Text style={styles.historyCategory}>
-                        {workout.category.toUpperCase()}
+                        {(workout.category || '').toUpperCase()}
                       </Text>
                     </View>
 
@@ -264,9 +286,7 @@ export default function WorkoutsScreen() {
                         : ''}
                     </Text>
 
-                    <Text style={styles.completedLabel}>
-                      COMPLETED
-                    </Text>
+                    <StatusBadge status="completed" />
                   </View>
                 </Card>
               );
@@ -324,6 +344,10 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginTop: SPACING.sm,
   },
+  addButton: {
+    borderRadius: RADIUS.md,
+    marginTop: SPACING.lg,
+  },
   list: {
     gap: SPACING.md,
     marginTop: SPACING.lg,
@@ -353,6 +377,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: SPACING.sm,
+  },
+  badgesGroup: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: SPACING.sm,
   },
   number: {
     color: '#465148',
@@ -525,12 +557,6 @@ const styles = StyleSheet.create({
   historyDate: {
     color: COLORS.muted,
     fontSize: TYPOGRAPHY.small,
-  },
-  completedLabel: {
-    color: COLORS.success,
-    fontSize: 9,
-    fontWeight: '900',
-    letterSpacing: 1,
   },
   loading: {
     alignItems: 'center',

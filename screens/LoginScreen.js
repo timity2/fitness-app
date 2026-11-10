@@ -1,22 +1,70 @@
 
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../constants/theme';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import {
+  COLORS,
+  SPACING,
+  TYPOGRAPHY,
+  RADIUS,
+} from '../constants/theme';
+
+import AppButton from '../components/ui/AppButton';
+import AppInput from '../components/ui/AppInput';
+
+import useUserStore from '../store/useUserStore';
+import { authenticateUser } from '../services/userStorage';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+  const login = useUserStore((state) => state.login);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!normalizedEmail || !password.trim()) {
+      Alert.alert('Ошибка', 'Введите email и пароль');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const user = await authenticateUser(normalizedEmail, password);
+
+      if (!user) {
+        Alert.alert(
+          'Ошибка входа',
+          'Неверный email или пароль. Проверьте данные и попробуйте снова.'
+        );
+        return;
+      }
+
+      const { password: savedPassword, ...safeUser } = user;
+
+      login(safeUser);
+      navigation.replace('Main');
+    } catch (error) {
+      console.error('Login error:', error);
+      Alert.alert('Ошибка', 'Не удалось выполнить вход.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Welcome to PULSE
-      </Text>
+      <Text style={styles.logo}>Welcome to PULSE</Text>
       <Text style={styles.subtitle}>YOUR BODY. YOUR RULES.</Text>
 
       <View style={styles.form}>
@@ -26,31 +74,39 @@ export default function LoginScreen() {
           Sign in to continue your fitness journey.
         </Text>
 
-        <Input
+        <AppInput
           label="EMAIL"
           placeholder="Enter your email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
         />
 
-        <Input
+        <AppInput
           label="PASSWORD"
           placeholder="Enter your password"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          isPassword
+          autoCapitalize="none"
         />
 
-        <Button
+        <AppButton
           title="SIGN IN"
-          onPress={() => navigation.replace('Main')}
+          onPress={handleLogin}
+          loading={loading}
+          disabled={loading}
+          size="lg"
         />
 
-        <Button
+        <AppButton
           title="CREATE ACCOUNT"
           variant="secondary"
           onPress={() => navigation.navigate('Register')}
+          disabled={loading}
+          size="lg"
         />
 
         <Text
@@ -81,6 +137,7 @@ const styles = StyleSheet.create({
     fontSize: TYPOGRAPHY.display,
     fontWeight: '900',
     letterSpacing: 5,
+    textAlign: 'center',
   },
   subtitle: {
     color: COLORS.textSecondary,
@@ -93,7 +150,9 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xxl,
     backgroundColor: COLORS.surface,
     padding: SPACING.lg,
-    borderRadius: 20,
+    borderRadius: RADIUS.lg,
+    borderWidth: 1,
+    borderColor: COLORS.border,
     gap: SPACING.md,
   },
   title: {

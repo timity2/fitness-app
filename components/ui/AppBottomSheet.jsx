@@ -7,11 +7,17 @@ import {
   Pressable,
   StyleSheet,
   Animated,
-  TouchableWithoutFeedback,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../../constants/theme';
+import {
+  COLORS,
+  SPACING,
+  TYPOGRAPHY,
+  RADIUS,
+} from '../../constants/theme';
 
 export default function AppBottomSheet({
   visible,
@@ -23,8 +29,10 @@ export default function AppBottomSheet({
   const translateY = useRef(new Animated.Value(500)).current;
 
   useEffect(() => {
+    let animation;
+
     if (visible) {
-      Animated.parallel([
+      animation = Animated.parallel([
         Animated.timing(backdropOpacity, {
           toValue: 1,
           duration: 250,
@@ -36,11 +44,17 @@ export default function AppBottomSheet({
           friction: 11,
           useNativeDriver: true,
         }),
-      ]).start();
+      ]);
+
+      animation.start();
     } else {
       backdropOpacity.setValue(0);
       translateY.setValue(500);
     }
+
+    return () => {
+      animation?.stop();
+    };
   }, [visible, backdropOpacity, translateY]);
 
   return (
@@ -52,14 +66,19 @@ export default function AppBottomSheet({
       statusBarTranslucent
     >
       <View style={styles.overlay}>
-        <TouchableWithoutFeedback onPress={onClose}>
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Закрыть панель"
+        >
           <Animated.View
             style={[
               styles.backdrop,
               { opacity: backdropOpacity },
             ]}
           />
-        </TouchableWithoutFeedback>
+        </Pressable>
 
         <Animated.View
           style={[
@@ -67,30 +86,37 @@ export default function AppBottomSheet({
             { transform: [{ translateY }] },
           ]}
         >
-          <View style={styles.header}>
-            <View style={styles.handle} />
-
-            <View style={styles.titleRow}>
-              <Text style={styles.title}>{title}</Text>
-
-              <Pressable
-                onPress={onClose}
-                style={styles.closeButton}
-                accessibilityRole="button"
-                accessibilityLabel="Close panel"
-              >
-                <Text style={styles.closeText}>×</Text>
-              </Pressable>
-            </View>
-          </View>
-
-          <ScrollView
-            style={styles.body}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
           >
-            {children}
-          </ScrollView>
+            <View style={styles.header}>
+              <View style={styles.handle} />
+
+              <View style={styles.titleRow}>
+                <Text style={styles.title}>
+                  {title}
+                </Text>
+
+                <Pressable
+                  onPress={onClose}
+                  style={styles.closeButton}
+                  accessibilityRole="button"
+                  accessibilityLabel="Закрыть панель"
+                >
+                  <Text style={styles.closeText}>×</Text>
+                </Pressable>
+              </View>
+            </View>
+
+            <ScrollView
+              style={styles.body}
+              contentContainerStyle={styles.bodyContent}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+            >
+              {children}
+            </ScrollView>
+          </KeyboardAvoidingView>
         </Animated.View>
       </View>
     </Modal>
@@ -104,12 +130,12 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.65)',
   },
   sheet: {
     backgroundColor: COLORS.surface,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: RADIUS.xl,
+    borderTopRightRadius: RADIUS.xl,
     maxHeight: '85%',
     minHeight: 180,
     overflow: 'hidden',
@@ -122,8 +148,8 @@ const styles = StyleSheet.create({
   handle: {
     width: 42,
     height: 4,
-    borderRadius: 10,
-    backgroundColor: '#666666',
+    borderRadius: RADIUS.round,
+    backgroundColor: COLORS.muted,
     alignSelf: 'center',
     marginBottom: SPACING.md,
   },
@@ -140,12 +166,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   closeButton: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: '#292929',
+    width: 36,
+    height: 36,
+    borderRadius: RADIUS.round,
+    backgroundColor: COLORS.surfaceLight,
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: SPACING.sm,
   },
   closeText: {
     color: COLORS.text,
@@ -154,6 +181,8 @@ const styles = StyleSheet.create({
   },
   body: {
     paddingHorizontal: SPACING.lg,
+  },
+  bodyContent: {
     paddingBottom: SPACING.xxl,
   },
 });

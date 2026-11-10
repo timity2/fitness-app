@@ -2,6 +2,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+import {
+  COLORS,
+  SPACING,
+  RADIUS,
+  TYPOGRAPHY,
+} from '../../constants/theme';
+
 const STATUS_CONFIG = {
   pending: {
     title: 'Ожидает',
@@ -15,25 +22,25 @@ const STATUS_CONFIG = {
   },
   completed: {
     title: 'Завершено',
-    color: '#8BEA5B',
-    background: 'rgba(139, 234, 91, 0.15)',
+    color: COLORS.success,
+    background: 'rgba(85, 217, 138, 0.15)',
   },
   cancelled: {
     title: 'Отменено',
-    color: '#FF6262',
-    background: 'rgba(255, 98, 98, 0.15)',
+    color: COLORS.error,
+    background: 'rgba(255, 77, 77, 0.15)',
   },
 };
 
 export function getStatusConfig(status) {
   return STATUS_CONFIG[status] || {
     title: 'Неизвестно',
-    color: '#AAAAAA',
-    background: 'rgba(170, 170, 170, 0.15)',
+    color: COLORS.textSecondary,
+    background: 'rgba(160, 170, 162, 0.12)',
   };
 }
 
-export default function StatusBadge({ status }) {
+export default function StatusBadge({ status, style }) {
   const config = getStatusConfig(status);
 
   return (
@@ -41,8 +48,16 @@ export default function StatusBadge({ status }) {
       style={[
         styles.badge,
         { backgroundColor: config.background },
+        style,
       ]}
     >
+      <View
+        style={[
+          styles.dot,
+          { backgroundColor: config.color },
+        ]}
+      />
+
       <Text style={[styles.text, { color: config.color }]}>
         {config.title}
       </Text>
@@ -53,12 +68,20 @@ export default function StatusBadge({ status }) {
 const styles = StyleSheet.create({
   badge: {
     alignSelf: 'flex-start',
-    paddingHorizontal: 11,
-    paddingVertical: 6,
-    borderRadius: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs + 2,
+    paddingHorizontal: SPACING.sm + 3,
+    paddingVertical: SPACING.xs + 2,
+    borderRadius: RADIUS.round,
+  },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: RADIUS.round,
   },
   text: {
-    fontSize: 11,
+    fontSize: TYPOGRAPHY.small - 1,
     fontWeight: '800',
     letterSpacing: 0.3,
   },

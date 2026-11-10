@@ -7,7 +7,11 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../../constants/theme';
+import {
+  COLORS,
+  RADIUS,
+  SHADOWS,
+} from '../../constants/theme';
 
 export default function AppButton({
   title,
@@ -25,11 +29,11 @@ export default function AppButton({
     primary: {
       backgroundColor: COLORS.primary,
       borderColor: COLORS.primary,
-      textColor: '#000000',
+      textColor: COLORS.background,
     },
     secondary: {
-      backgroundColor: COLORS.surface,
-      borderColor: COLORS.surface,
+      backgroundColor: COLORS.surfaceLight,
+      borderColor: COLORS.surfaceLight,
       textColor: COLORS.text,
     },
     outline: {
@@ -38,27 +42,30 @@ export default function AppButton({
       textColor: COLORS.primary,
     },
     danger: {
-      backgroundColor: COLORS.error || '#E53935',
-      borderColor: COLORS.error || '#E53935',
+      backgroundColor: COLORS.error,
+      borderColor: COLORS.error,
       textColor: '#FFFFFF',
     },
   };
 
   const sizes = {
     sm: {
-      paddingVertical: 8,
+      paddingVertical: 9,
       paddingHorizontal: 14,
       fontSize: 12,
+      minHeight: 38,
     },
     md: {
       paddingVertical: 14,
       paddingHorizontal: 18,
       fontSize: 14,
+      minHeight: 48,
     },
     lg: {
-      paddingVertical: 18,
+      paddingVertical: 17,
       paddingHorizontal: 22,
       fontSize: 16,
+      minHeight: 56,
     },
   };
 
@@ -69,6 +76,8 @@ export default function AppButton({
     <Pressable
       onPress={onPress}
       disabled={isDisabled}
+      accessibilityRole="button"
+      accessibilityState={{ disabled: isDisabled, busy: loading }}
       style={({ pressed }) => [
         styles.button,
         {
@@ -76,8 +85,10 @@ export default function AppButton({
           borderColor: colors.borderColor,
           paddingVertical: dimensions.paddingVertical,
           paddingHorizontal: dimensions.paddingHorizontal,
-          opacity: isDisabled ? 0.5 : pressed ? 0.8 : 1,
+          minHeight: dimensions.minHeight,
+          opacity: isDisabled ? 0.45 : pressed ? 0.8 : 1,
         },
+        variant === 'primary' && !isDisabled && styles.primaryShadow,
         style,
       ]}
     >
@@ -105,16 +116,23 @@ export default function AppButton({
 
 const styles = StyleSheet.create({
   button: {
-    minHeight: 44,
     borderWidth: 1,
-    borderRadius: 12,
+    borderRadius: RADIUS.md,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     gap: 8,
   },
+  primaryShadow: {
+    shadowColor: SHADOWS.neon.shadowColor,
+    shadowOffset: SHADOWS.neon.shadowOffset,
+    shadowOpacity: 0.2,
+    shadowRadius: 7,
+    elevation: 3,
+  },
   text: {
-    fontWeight: '800',
+    fontWeight: '900',
     textAlign: 'center',
+    letterSpacing: 0.4,
   },
 });

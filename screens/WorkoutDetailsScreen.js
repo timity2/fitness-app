@@ -1,5 +1,12 @@
 
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 import {
@@ -13,23 +20,73 @@ import Header from '../components/Header';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
 import Button from '../components/Button';
+import useWorkoutStore from '../store/useWorkoutStore';
 
 export default function WorkoutDetailsScreen() {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const workout = route.params?.workout || {};
+  const routeWorkout = route.params?.workout || {};
+
+  const storedWorkout = useWorkoutStore((state) =>
+    state.workouts.find(
+      (item) => item.id === routeWorkout.id
+    )
+  );
+
+  const deleteWorkout = useWorkoutStore(
+    (state) => state.deleteWorkout
+  );
+
+  const workout = storedWorkout || routeWorkout;
 
   const title = workout.title || workout.name || 'WORKOUT';
   const category = workout.category || 'GENERAL';
   const level = workout.level || 'BEGINNER';
-  const duration = workout.durationLabel ||
+
+  const duration =
+    workout.durationLabel ||
     (workout.duration ? `${workout.duration} MIN` : '—');
 
   const exercises = workout.exercises || [];
 
   const startWorkout = () => {
     navigation.navigate('ActiveWorkout', { workout });
+  };
+
+  const editWorkout = () => {
+    navigation.navigate('WorkoutForm', { workout });
+  };
+
+  const confirmDelete = () => {
+    Alert.alert(
+      'Удалить тренировку?',
+      `Вы действительно хотите удалить «${title}»? Это действие нельзя отменить.`,
+      [
+        {
+          text: 'Отмена',
+          style: 'cancel',
+        },
+        {
+          text: 'Удалить',
+          style: 'destructive',
+          onPress: async () => {
+            const success = await deleteWorkout(workout.id);
+
+            if (success) {
+              navigation.navigate('Main', {
+                screen: 'Workouts',
+              });
+            } else {
+              Alert.alert(
+                'Ошибка',
+                'Не удалось удалить тренировку'
+              );
+            }
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -160,6 +217,18 @@ export default function WorkoutDetailsScreen() {
         <Button
           title="START WORKOUT"
           onPress={startWorkout}
+        />
+
+        <Button
+          title="EDIT WORKOUT"
+          variant="secondary"
+          onPress={editWorkout}
+        />
+
+        <Button
+          title="DELETE WORKOUT"
+          variant="secondary"
+          onPress={confirmDelete}
         />
 
         <Button

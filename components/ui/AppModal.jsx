@@ -7,10 +7,14 @@ import {
   Pressable,
   StyleSheet,
   Animated,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../../constants/theme';
+import {
+  COLORS,
+  SPACING,
+  TYPOGRAPHY,
+  RADIUS,
+} from '../../constants/theme';
 
 export default function AppModal({
   visible,
@@ -22,8 +26,10 @@ export default function AppModal({
   const contentTranslate = useRef(new Animated.Value(30)).current;
 
   useEffect(() => {
+    let animation;
+
     if (visible) {
-      Animated.parallel([
+      animation = Animated.parallel([
         Animated.timing(backdropOpacity, {
           toValue: 1,
           duration: 220,
@@ -35,11 +41,17 @@ export default function AppModal({
           friction: 10,
           useNativeDriver: true,
         }),
-      ]).start();
+      ]);
+
+      animation.start();
     } else {
       backdropOpacity.setValue(0);
       contentTranslate.setValue(30);
     }
+
+    return () => {
+      animation?.stop();
+    };
   }, [visible, backdropOpacity, contentTranslate]);
 
   return (
@@ -51,14 +63,19 @@ export default function AppModal({
       statusBarTranslucent
     >
       <View style={styles.overlay}>
-        <TouchableWithoutFeedback onPress={onClose}>
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Закрыть окно"
+        >
           <Animated.View
             style={[
               styles.backdrop,
               { opacity: backdropOpacity },
             ]}
           />
-        </TouchableWithoutFeedback>
+        </Pressable>
 
         <Animated.View
           style={[
@@ -70,13 +87,15 @@ export default function AppModal({
             <View style={styles.handle} />
 
             <View style={styles.titleRow}>
-              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.title}>
+                {title}
+              </Text>
 
               <Pressable
                 onPress={onClose}
                 style={styles.closeButton}
                 accessibilityRole="button"
-                accessibilityLabel="Close modal"
+                accessibilityLabel="Закрыть окно"
               >
                 <Text style={styles.closeText}>×</Text>
               </Pressable>
@@ -97,16 +116,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: SPACING.md,
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.65)',
+    backgroundColor: 'rgba(0, 0, 0, 0.72)',
   },
   content: {
-    width: '90%',
+    width: '100%',
     maxWidth: 480,
+    maxHeight: '85%',
     backgroundColor: COLORS.surface,
-    borderRadius: 20,
+    borderRadius: RADIUS.lg,
+    borderWidth: 1,
+    borderColor: COLORS.border,
     overflow: 'hidden',
     elevation: 10,
   },
@@ -117,8 +140,8 @@ const styles = StyleSheet.create({
   handle: {
     width: 42,
     height: 4,
-    borderRadius: 10,
-    backgroundColor: '#666666',
+    borderRadius: RADIUS.round,
+    backgroundColor: COLORS.muted,
     alignSelf: 'center',
     marginBottom: SPACING.md,
   },
@@ -135,12 +158,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   closeButton: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: '#292929',
+    width: 36,
+    height: 36,
+    borderRadius: RADIUS.round,
+    backgroundColor: COLORS.surfaceLight,
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: SPACING.sm,
   },
   closeText: {
     color: COLORS.text,

@@ -1,15 +1,30 @@
 
 import { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  ScrollView,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { COLORS, SPACING, TYPOGRAPHY } from '../constants/theme';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import {
+  COLORS,
+  SPACING,
+  TYPOGRAPHY,
+  RADIUS,
+} from '../constants/theme';
+
+import AppButton from '../components/ui/AppButton';
+import AppInput from '../components/ui/AppInput';
+
+import useUserStore from '../store/useUserStore';
 import { saveUser } from '../services/userStorage';
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
+  const login = useUserStore((state) => state.login);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,20 +32,22 @@ export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!name.trim() || !email.trim() || !password.trim()) {
-      Alert.alert('Missing information', 'Please fill in all fields.');
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!name.trim() || !normalizedEmail || !password.trim()) {
+      Alert.alert('Ошибка', 'Заполните все поля.');
       return;
     }
 
-    if (!email.includes('@')) {
-      Alert.alert('Invalid email', 'Please enter a valid email.');
+    if (!normalizedEmail.includes('@')) {
+      Alert.alert('Некорректный email', 'Введите правильный email.');
       return;
     }
 
     if (password.length < 6) {
       Alert.alert(
-        'Weak password',
-        'Password must be at least 6 characters.'
+        'Слабый пароль',
+        'Пароль должен содержать минимум 6 символов.'
       );
       return;
     }
@@ -39,18 +56,26 @@ export default function RegisterScreen() {
 
     try {
       const user = {
+        id: `user-${Date.now()}`,
         name: name.trim(),
-        email: email.trim().toLowerCase(),
+        email: normalizedEmail,
         password,
+        goal: 'BUILD MUSCLE',
+        weeklyTarget: 5,
+        fitnessLevel: 'INTERMEDIATE',
         createdAt: new Date().toISOString(),
       };
 
       const saved = await saveUser(user);
 
       if (!saved) {
-        Alert.alert('Error', 'Could not save your account.');
+        Alert.alert('Ошибка', 'Не удалось сохранить аккаунт.');
         return;
       }
+
+      const { password: savedPassword, ...safeUser } = user;
+
+      login(safeUser);
 
       navigation.reset({
         index: 0,
@@ -58,15 +83,22 @@ export default function RegisterScreen() {
       });
     } catch (error) {
       console.error('Registration error:', error);
-      Alert.alert('Error', 'Registration failed. Please try again.');
+      Alert.alert(
+        'Ошибка',
+        'Регистрация не удалась. Попробуйте ещё раз.'
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>FITNESS</Text>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.content}
+      keyboardShouldPersistTaps="handled"
+    >
+      <Text style={styles.logo}>PULSE</Text>
       <Text style={styles.subtitle}>START YOUR JOURNEY</Text>
 
       <View style={styles.form}>
@@ -76,33 +108,40 @@ export default function RegisterScreen() {
           Join us and build your stronger self.
         </Text>
 
-        <Input
+        <AppInput
           label="FULL NAME"
           placeholder="Enter your name"
           value={name}
           onChangeText={setName}
+          autoCapitalize="words"
+          maxLength={50}
         />
 
-        <Input
+        <AppInput
           label="EMAIL"
           placeholder="Enter your email"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
         />
 
-        <Input
+        <AppInput
           label="PASSWORD"
           placeholder="Create a password"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          isPassword
+          autoCapitalize="none"
         />
 
-        <Button
-          title={loading ? 'CREATING...' : 'CREATE ACCOUNT'}
+        <AppButton
+          title="CREATE ACCOUNT"
           onPress={handleRegister}
+          loading={loading}
           disabled={loading}
+          size="lg"
         />
 
         <Text
@@ -116,7 +155,7 @@ export default function RegisterScreen() {
       <Text style={styles.footer}>
         TRAIN HARD. STAY STRONG.
       </Text>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -124,6 +163,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+  content: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: SPACING.lg,
@@ -145,7 +187,9 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xxl,
     backgroundColor: COLORS.surface,
     padding: SPACING.lg,
-    borderRadius: 20,
+    borderRadius: RADIUS.lg,
+    borderWidth: 1,
+    borderColor: COLORS.border,
     gap: SPACING.md,
   },
   title: {

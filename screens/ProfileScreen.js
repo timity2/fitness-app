@@ -1,18 +1,60 @@
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   COLORS,
   SPACING,
   TYPOGRAPHY,
-  RADIUS,
 } from '../constants/theme';
 
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
 import Button from '../components/Button';
+import useUserStore from '../store/useUserStore';
 
 export default function ProfileScreen() {
+  const navigation = useNavigation();
+
+  const user = useUserStore((state) => state.user);
+  const logout = useUserStore((state) => state.logout);
+
+  const name = user?.name || 'ATHLETE';
+  const email = user?.email || 'No email';
+  const initial = name.charAt(0).toUpperCase();
+
+  const confirmLogout = () => {
+    Alert.alert(
+      'LOG OUT',
+      'Are you sure you want to log out?',
+      [
+        {
+          text: 'CANCEL',
+          style: 'cancel',
+        },
+        {
+          text: 'LOG OUT',
+          style: 'destructive',
+          onPress: () => {
+            logout();
+
+            navigation.getParent()?.reset({
+              index: 0,
+              routes: [{ name: 'Login' }],
+            });
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <ScrollView
       style={styles.container}
@@ -39,7 +81,7 @@ export default function ProfileScreen() {
       <Card style={styles.profileCard}>
         <View style={styles.profileTop}>
           <View style={styles.avatar}>
-            <Text style={styles.avatarText}>A</Text>
+            <Text style={styles.avatarText}>{initial}</Text>
           </View>
 
           <View style={styles.memberInfo}>
@@ -52,8 +94,8 @@ export default function ProfileScreen() {
 
         <View style={styles.profileDivider} />
 
-        <Text style={styles.name}>ATHLETE</Text>
-        <Text style={styles.email}>athlete@example.com</Text>
+        <Text style={styles.name}>{name.toUpperCase()}</Text>
+        <Text style={styles.email}>{email}</Text>
 
         <View style={styles.badgeContainer}>
           <Badge title="FITNESS MEMBER" />
@@ -61,7 +103,9 @@ export default function ProfileScreen() {
 
         <View style={styles.memberFooter}>
           <Text style={styles.footerLabel}>MEMBER ID</Text>
-          <Text style={styles.footerValue}>#FIT-0001</Text>
+          <Text style={styles.footerValue}>
+            #{user?.id || 'FIT-0001'}
+          </Text>
         </View>
       </Card>
 
@@ -86,7 +130,9 @@ export default function ProfileScreen() {
 
           <View style={styles.goalInfo}>
             <Text style={styles.infoLabel}>MAIN GOAL</Text>
-            <Text style={styles.infoValue}>BUILD MUSCLE</Text>
+            <Text style={styles.infoValue}>
+              {user?.goal || 'NOT SET'}
+            </Text>
           </View>
         </View>
 
@@ -99,7 +145,9 @@ export default function ProfileScreen() {
 
           <View style={styles.goalInfo}>
             <Text style={styles.infoLabel}>WEEKLY TARGET</Text>
-            <Text style={styles.infoValue}>5 WORKOUTS</Text>
+            <Text style={styles.infoValue}>
+              {user?.weeklyTarget ?? 0} WORKOUTS
+            </Text>
           </View>
         </View>
 
@@ -112,7 +160,9 @@ export default function ProfileScreen() {
 
           <View style={styles.goalInfo}>
             <Text style={styles.infoLabel}>FITNESS LEVEL</Text>
-            <Text style={styles.infoValue}>INTERMEDIATE</Text>
+            <Text style={styles.infoValue}>
+              {user?.fitnessLevel || 'NOT SET'}
+            </Text>
           </View>
         </View>
       </Card>
@@ -178,7 +228,7 @@ export default function ProfileScreen() {
         <Button
           title="LOG OUT"
           variant="secondary"
-          onPress={() => {}}
+          onPress={confirmLogout}
         />
 
         <Text style={styles.version}>FITNESS APP • VERSION 1.0</Text>
