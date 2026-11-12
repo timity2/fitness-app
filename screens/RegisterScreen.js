@@ -82,7 +82,6 @@ export default function RegisterScreen() {
         routes: [{ name: 'Main' }],
       });
     } catch (error) {
-      console.error('Registration error:', error);
       Alert.alert(
         'Ошибка',
         'Регистрация не удалась. Попробуйте ещё раз.'

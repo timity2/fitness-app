@@ -1,8 +1,11 @@
+
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import mockWorkouts from './mockWorkouts';
+import { fetchWorkouts } from '../services/workoutApi';
+
+let latestLoadRequest = 0;
 
 const useWorkoutStore = create(
   persist(
@@ -11,53 +14,85 @@ const useWorkoutStore = create(
       isLoading: false,
       error: null,
 
-      // Загрузка тренировок
-      loadWorkouts: async () => {
+      // Загрузка тренировок с REST API
+      loadWorkouts: async (signal) => {
+        const requestId = ++latestLoadRequest;
         set({ isLoading: true, error: null });
 
         try {
-          await new Promise((resolve) => setTimeout(resolve, 500));
+          const apiWorkouts = await fetchWorkouts(signal);
+
+          if (signal?.aborted || requestId !== latestLoadRequest) {
+            return get().workouts;
+          }
 
           const currentWorkouts = get().workouts;
 
-          if (currentWorkouts.length === 0) {
-            const preparedWorkouts = mockWorkouts.map((workout) => ({
-              ...workout,
-              status: workout.status || 'pending',
-              statusHistory: workout.statusHistory || [
-                {
-                  status: workout.status || 'pending',
-                  date: workout.createdAt || new Date().toISOString(),
-                },
-              ],
-            }));
-
-            set({ workouts: preparedWorkouts });
-          } else {
-            const preparedWorkouts = currentWorkouts.map((workout) => ({
-              ...workout,
-              status: workout.status || 'pending',
-              statusHistory: workout.statusHistory || [
-                {
-                  status: workout.status || 'pending',
-                  date: workout.createdAt || new Date().toISOString(),
-                },
-              ],
-            }));
-
-            set({ workouts: preparedWorkouts });
-          }
-
-          set({ isLoading: false });
-
-          return get().workouts;
-        } catch (error) {
-          set({
-            isLoading: false,
-            error: error.message || 'Не удалось загрузить тренировки',
+          // Убираем серверные записи предыдущей загрузки и старые mock-данные.
+          // Пользовательские записи с id workout-<timestamp> сохраняются.
+          const localWorkouts = currentWorkouts.filter((workout) => {
+            const id = String(workout.id);
+            return !id.startsWith('api-') && !/^workout-\d{3}$/.test(id);
           });
 
-          return [];
+          const previousApiWorkouts = new Map(
+            currentWorkouts
+              .filter((workout) => String(workout.id).startsWith('api-'))
+              .map((workout) => [String(workout.id), workout])
+          );
+
+          const refreshedApiWorkouts = apiWorkouts.map((workout) => {
+            const previous = previousApiWorkouts.get(String(workout.id));
+
+            return {
+              ...workout,
+              ...(previous
+                ? {
+                    status: previous.status || workout.status,
+                    statusHistory: previous.statusHistory || [],
+                  }
+                : {}),
+            };
+          });
+
+          const preparedWorkouts = [
+            ...localWorkouts,
+            ...refreshedApiWorkouts,
+          ].map((workout) => ({
+            ...workout,
+            status: workout.status || 'pending',
+            statusHistory:
+              workout.statusHistory?.length > 0
+                ? workout.statusHistory
+                : [
+                    {
+                      status: workout.status || 'pending',
+                      date: workout.createdAt || new Date().toISOString(),
+                    },
+                  ],
+          }));
+
+          if (requestId === latestLoadRequest && !signal?.aborted) {
+            set({ workouts: preparedWorkouts, error: null });
+          }
+
+          return preparedWorkouts;
+        } catch (error) {
+          if (error.name === 'AbortError') {
+            return get().workouts;
+          }
+
+          if (requestId === latestLoadRequest) {
+            set({
+              error: error.message || 'Не удалось загрузить тренировки',
+            });
+          }
+
+          return get().workouts;
+        } finally {
+          if (requestId === latestLoadRequest) {
+            set({ isLoading: false });
+          }
         }
       },
 

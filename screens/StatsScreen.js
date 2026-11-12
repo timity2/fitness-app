@@ -1,9 +1,11 @@
-import { useState, useCallback } from 'react';
+
+import { useCallback } from 'react';
 import {
   ScrollView,
   View,
   Text,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -16,59 +18,76 @@ import {
 
 import Header from '../components/Header';
 import Card from '../components/Card';
-import { getWorkouts } from '../services/workoutStorage';
+import useWorkoutStore from '../store/useWorkoutStore';
 
 const WEEK_DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 
 export default function StatsScreen() {
-  const [workouts, setWorkouts] = useState([]);
+  const workouts = useWorkoutStore((state) => state.workouts);
+  const isLoading = useWorkoutStore((state) => state.isLoading);
+  const loadWorkouts = useWorkoutStore((state) => state.loadWorkouts);
 
   useFocusEffect(
     useCallback(() => {
-      let isActive = true;
+      const controller = new AbortController();
 
-      const loadWorkouts = async () => {
-        const data = await getWorkouts();
-
-        if (isActive) {
-          setWorkouts(data);
-        }
-      };
-
-      loadWorkouts();
+      loadWorkouts(controller.signal);
 
       return () => {
-        isActive = false;
+        controller.abort();
       };
-    }, [])
+    }, [loadWorkouts])
   );
 
-  const totalWorkouts = workouts.length;
-
-  const totalMinutes = Math.floor(
-    workouts.reduce(
-      (total, workout) => total + (workout.durationSeconds || 0),
-      0
-    ) / 60
+  const completedWorkouts = workouts.filter(
+    (workout) => workout.status === 'completed'
   );
+
+  const totalWorkouts = completedWorkouts.length;
+
+  const totalMinutes = completedWorkouts.reduce(
+    (total, workout) => total + (Number(workout.duration) || 0),
+    0
+  );
+
+  const totalCalories = completedWorkouts.reduce(
+    (total, workout) => total + (Number(workout.calories) || 0),
+    0
+  );
+
+  const getCompletionDate = (workout) => {
+    if (workout.completedAt) {
+      return workout.completedAt;
+    }
+
+    const completion = [...(workout.statusHistory || [])]
+      .reverse()
+      .find((item) => item.status === 'completed');
+
+    return completion?.date || null;
+  };
 
   const getWeekActivity = () => {
     const now = new Date();
     const monday = new Date(now);
     const day = monday.getDay();
+
     monday.setDate(monday.getDate() - (day === 0 ? 6 : day - 1));
     monday.setHours(0, 0, 0, 0);
 
-    const activity = WEEK_DAYS.map((dayName, index) => {
+    return WEEK_DAYS.map((dayName, index) => {
       const date = new Date(monday);
       date.setDate(monday.getDate() + index);
 
       const count = workouts.filter((workout) => {
-        if (!workout.completedAt) return false;
+        const completionDate = getCompletionDate(workout);
 
-        const completedDate = new Date(workout.completedAt);
+        if (!completionDate) return false;
 
-        return completedDate.toDateString() === date.toDateString();
+        return (
+          new Date(completionDate).toDateString() ===
+          date.toDateString()
+        );
       }).length;
 
       return {
@@ -76,8 +95,6 @@ export default function StatsScreen() {
         count,
       };
     });
-
-    return activity;
   };
 
   const weekActivity = getWeekActivity();
@@ -149,7 +166,7 @@ export default function StatsScreen() {
             <Text style={styles.statIndex}>03</Text>
           </View>
 
-          <Text style={styles.value}>—</Text>
+          <Text style={styles.value}>{totalCalories}</Text>
           <Text style={styles.label}>CALORIES</Text>
         </Card>
 
@@ -186,7 +203,8 @@ export default function StatsScreen() {
           <View>
             <Text style={styles.chartCaption}>WORKOUT FREQUENCY</Text>
             <Text style={styles.chartTitle}>
-              {weeklyWorkouts} <Text style={styles.chartTitleMuted}>this week</Text>
+              {weeklyWorkouts}{' '}
+              <Text style={styles.chartTitleMuted}>this week</Text>
             </Text>
           </View>
 
@@ -196,7 +214,12 @@ export default function StatsScreen() {
           </View>
         </View>
 
-        {totalWorkouts === 0 ? (
+        {isLoading && totalWorkouts === 0 ? (
+          <ActivityIndicator
+            color={COLORS.primary}
+            style={styles.loader}
+          />
+        ) : totalWorkouts === 0 ? (
           <Text style={styles.emptyText}>
             Complete your first workout to see your activity here.
           </Text>
@@ -485,6 +508,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: SPACING.lg,
     lineHeight: 21,
+  },
+  loader: {
+    padding: SPACING.lg,
   },
   goalCard: {
     gap: SPACING.lg,

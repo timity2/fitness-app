@@ -27,7 +27,6 @@ async function getUsers() {
 
     return [];
   } catch (error) {
-    console.error('Error getting users:', error);
     return [];
   }
 }
@@ -57,7 +56,6 @@ export async function saveUser(user) {
 
     return true;
   } catch (error) {
-    console.error('Error saving user:', error);
     return false;
   }
 }
@@ -105,7 +103,6 @@ export async function removeUser(email) {
 
     return true;
   } catch (error) {
-    console.error('Error removing user:', error);
     return false;
   }
 }

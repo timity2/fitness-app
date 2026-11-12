@@ -5,6 +5,7 @@ import {
   View,
   Text,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
@@ -21,7 +22,7 @@ import Badge from '../components/Badge';
 import Button from '../components/Button';
 
 import { getUser } from '../services/userStorage';
-import { getWorkouts } from '../services/workoutStorage';
+import useWorkoutStore from '../store/useWorkoutStore';
 
 const WEEKLY_GOAL = 5;
 
@@ -29,44 +30,56 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const [userName, setUserName] = useState('ATHLETE');
-  const [workouts, setWorkouts] = useState([]);
+
+  const workouts = useWorkoutStore((state) => state.workouts);
+  const isLoading = useWorkoutStore((state) => state.isLoading);
+  const loadWorkouts = useWorkoutStore((state) => state.loadWorkouts);
 
   useFocusEffect(
     useCallback(() => {
       let active = true;
+      const controller = new AbortController();
 
       async function loadData() {
-        const [user, savedWorkouts] = await Promise.all([
-          getUser(),
-          getWorkouts(),
-        ]);
+        try {
+          const user = await getUser();
 
-        if (!active) return;
+          if (active && user?.name) {
+            setUserName(user.name.toUpperCase());
+          }
 
-        if (user?.name) {
-          setUserName(user.name.toUpperCase());
+          await loadWorkouts(controller.signal);
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            // Ошибка загрузки тренировок отображается в соответствующем разделе.
+          }
         }
-
-        setWorkouts(savedWorkouts);
       }
 
       loadData();
 
       return () => {
         active = false;
+        controller.abort();
       };
-    }, [])
+    }, [loadWorkouts])
   );
 
-  const totalMinutes = Math.floor(
-    workouts.reduce(
-      (total, workout) =>
-        total + (workout.durationSeconds || 0),
-      0
-    ) / 60
+  const completedWorkouts = workouts.filter(
+    (workout) => workout.status === 'completed'
   );
 
-  const totalWorkouts = workouts.length;
+  const totalMinutes = completedWorkouts.reduce(
+    (total, workout) => total + (Number(workout.duration) || 0),
+    0
+  );
+
+  const totalWorkouts = completedWorkouts.length;
+
+  const totalCalories = completedWorkouts.reduce(
+    (total, workout) => total + (Number(workout.calories) || 0),
+    0
+  );
 
   const now = new Date();
   const monday = new Date(now);
@@ -78,9 +91,13 @@ export default function HomeScreen() {
   monday.setHours(0, 0, 0, 0);
 
   const weeklyWorkouts = workouts.filter((workout) => {
-    if (!workout.completedAt) return false;
+    const completion = [...(workout.statusHistory || [])]
+      .reverse()
+      .find((item) => item.status === 'completed');
 
-    const completedDate = new Date(workout.completedAt);
+    if (!completion?.date) return false;
+
+    const completedDate = new Date(completion.date);
 
     return completedDate >= monday && completedDate <= now;
   }).length;
@@ -107,6 +124,7 @@ export default function HomeScreen() {
             <Text style={styles.welcome}>WELCOME BACK</Text>
             <Text style={styles.name}>{userName}</Text>
           </View>
+
           <View style={styles.heroMark}>
             <Text style={styles.heroMarkText}>F</Text>
           </View>
@@ -134,7 +152,7 @@ export default function HomeScreen() {
 
         <Card style={styles.statCard}>
           <Text style={styles.statIcon}>⚡</Text>
-          <Text style={styles.statValue}>—</Text>
+          <Text style={styles.statValue}>{totalCalories}</Text>
           <Text style={styles.statLabel}>CALORIES</Text>
         </Card>
 
@@ -171,6 +189,7 @@ export default function HomeScreen() {
             {weeklyWorkouts}
             <Text style={styles.progressTotal}> / {WEEKLY_GOAL}</Text>
           </Text>
+
           <Text style={styles.progressUnit}>WORKOUTS</Text>
         </View>
 
@@ -198,14 +217,19 @@ export default function HomeScreen() {
       <Card style={styles.workoutCard}>
         <View style={styles.workoutTop}>
           <View style={styles.workoutTag}>
-            <Text style={styles.workoutTagText}>FEATURED WORKOUT</Text>
+            <Text style={styles.workoutTagText}>
+              FEATURED WORKOUT
+            </Text>
           </View>
+
           <Text style={styles.workoutSymbol}>✦</Text>
         </View>
 
         <Text style={styles.workoutTitle}>
           FULL BODY{'\n'}
-          <Text style={styles.workoutTitleAccent}>TRAINING.</Text>
+          <Text style={styles.workoutTitleAccent}>
+            TRAINING.
+          </Text>
         </Text>
 
         <Text style={styles.workoutDescription}>
@@ -217,6 +241,12 @@ export default function HomeScreen() {
           onPress={() => navigation.navigate('WorkoutDetails')}
         />
       </Card>
+
+      {isLoading && (
+        <View style={styles.loading}>
+          <ActivityIndicator color={COLORS.primary} />
+        </View>
+      )}
     </ScrollView>
   );
 }
@@ -449,5 +479,9 @@ const styles = StyleSheet.create({
     fontSize: TYPOGRAPHY.body,
     lineHeight: 21,
     marginVertical: SPACING.md,
+  },
+  loading: {
+    alignItems: 'center',
+    padding: SPACING.lg,
   },
 });

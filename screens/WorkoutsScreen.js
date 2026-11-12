@@ -1,5 +1,5 @@
 
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import {
   ScrollView,
   View,
@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Pressable,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {
   useNavigation,
@@ -44,12 +45,36 @@ export default function WorkoutsScreen() {
   const error = useWorkoutStore((state) => state.error);
   const loadWorkouts = useWorkoutStore((state) => state.loadWorkouts);
   const clearError = useWorkoutStore((state) => state.clearError);
+  const refreshController = useRef(null);
 
+  // Загрузка при открытии экрана и отмена при уходе
   useFocusEffect(
     useCallback(() => {
-      loadWorkouts();
+      const controller = new AbortController();
+
+      loadWorkouts(controller.signal);
+
+      return () => {
+        controller.abort();
+        refreshController.current?.abort();
+        refreshController.current = null;
+      };
     }, [loadWorkouts])
   );
+
+  // Обновление списка свайпом вниз
+  const handleRefresh = useCallback(() => {
+    refreshController.current?.abort();
+
+    const controller = new AbortController();
+    refreshController.current = controller;
+
+    loadWorkouts(controller.signal).finally(() => {
+      if (refreshController.current === controller) {
+        refreshController.current = null;
+      }
+    });
+  }, [loadWorkouts]);
 
   const completedWorkouts = [...workouts]
     .filter((workout) => workout.status === 'completed')
@@ -91,6 +116,14 @@ export default function WorkoutsScreen() {
       style={styles.container}
       contentContainerStyle={styles.content}
       showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+          refreshing={isLoading}
+          onRefresh={handleRefresh}
+          tintColor={COLORS.primary}
+          colors={[COLORS.primary]}
+        />
+      }
     >
       <Header
         title="WORKOUTS"
@@ -126,7 +159,7 @@ export default function WorkoutsScreen() {
           <ActivityIndicator color={COLORS.primary} size="large" />
           <Text style={styles.emptyText}>LOADING WORKOUTS...</Text>
         </View>
-      ) : error ? (
+      ) : error && workouts.length === 0 ? (
         <Card style={styles.historyCard}>
           <Text style={styles.emptyTitle}>LOADING ERROR</Text>
           <Text style={styles.emptyText}>{error}</Text>
@@ -134,81 +167,106 @@ export default function WorkoutsScreen() {
           <Pressable
             onPress={() => {
               clearError();
-              loadWorkouts();
+              handleRefresh();
             }}
           >
             <Text style={styles.retryText}>TRY AGAIN</Text>
           </Pressable>
         </Card>
       ) : (
-        <View style={styles.list}>
-          {workouts.map((workout, index) => (
-            <Pressable
-              key={workout.id}
-              onPress={() => openWorkout(workout)}
-              style={({ pressed }) => [
-                styles.pressable,
-                pressed && styles.pressed,
-              ]}
-            >
-              <Card style={styles.workoutCard}>
-                <View
-                  style={[
-                    styles.accentBar,
-                    {
-                      backgroundColor:
-                        CATEGORY_ACCENTS[workout.category] ||
-                        COLORS.primary,
-                    },
+        <>
+          {error ? (
+            <Card style={styles.historyCard}>
+              <Text style={styles.emptyText}>{error}</Text>
+              <Pressable
+                onPress={() => {
+                  clearError();
+                  loadWorkouts();
+                }}
+              >
+                <Text style={styles.retryText}>TRY AGAIN</Text>
+              </Pressable>
+            </Card>
+          ) : null}
+
+          {workouts.length === 0 ? (
+            <Card style={styles.historyCard}>
+              <Text style={styles.emptyTitle}>NO WORKOUTS FOUND</Text>
+              <Text style={styles.emptyText}>
+                There are no workouts to display yet.
+              </Text>
+            </Card>
+          ) : (
+            <View style={styles.list}>
+              {workouts.map((workout, index) => (
+                <Pressable
+                  key={workout.id}
+                  onPress={() => openWorkout(workout)}
+                  style={({ pressed }) => [
+                    styles.pressable,
+                    pressed && styles.pressed,
                   ]}
-                />
+                >
+                  <Card style={styles.workoutCard}>
+                    <View
+                      style={[
+                        styles.accentBar,
+                        {
+                          backgroundColor:
+                            CATEGORY_ACCENTS[workout.category] ||
+                            COLORS.primary,
+                        },
+                      ]}
+                    />
 
-                <View style={styles.cardContent}>
-                  <View style={styles.topRow}>
-                    <View style={styles.badgesGroup}>
-                      <Badge
-                        title={(workout.category || 'Тренировка').toUpperCase()}
-                      />
-                      <StatusBadge status={workout.status} />
-                    </View>
+                    <View style={styles.cardContent}>
+                      <View style={styles.topRow}>
+                        <View style={styles.badgesGroup}>
+                          <Badge
+                            title={(workout.category || 'Тренировка').toUpperCase()}
+                          />
+                          <StatusBadge status={workout.status} />
+                        </View>
 
-                    <Text style={styles.number}>
-                      {String(index + 1).padStart(2, '0')}
-                    </Text>
-                  </View>
-
-                  <Text style={styles.title}>
-                    {(workout.name || 'Без названия').toUpperCase()}
-                  </Text>
-
-                  <View style={styles.bottomRow}>
-                    <View style={styles.metaGroup}>
-                      <View style={styles.metaItem}>
-                        <Text style={styles.metaLabel}>DURATION</Text>
-                        <Text style={styles.duration}>
-                          {workout.duration} MIN
+                        <Text style={styles.number}>
+                          {String(index + 1).padStart(2, '0')}
                         </Text>
                       </View>
 
-                      <View style={styles.metaDivider} />
+                      <Text style={styles.title}>
+                        {(workout.name || 'Без названия').toUpperCase()}
+                      </Text>
 
-                      <View style={styles.metaItem}>
-                        <Text style={styles.metaLabel}>LEVEL</Text>
-                        <Text style={styles.level}>
-                          {(workout.level || '—').toUpperCase()}
-                        </Text>
+                      <View style={styles.bottomRow}>
+                        <View style={styles.metaGroup}>
+                          <View style={styles.metaItem}>
+                            <Text style={styles.metaLabel}>DURATION</Text>
+                            <Text style={styles.duration}>
+                              {workout.duration} MIN
+                            </Text>
+                          </View>
+
+                          <View style={styles.metaDivider} />
+
+                          <View style={styles.metaItem}>
+                            <Text style={styles.metaLabel}>LEVEL</Text>
+                            <Text style={styles.level}>
+                              {(workout.level || '—').toUpperCase()}
+                            </Text>
+                          </View>
+                        </View>
+
+                        <View style={styles.arrowCircle}>
+                          <Text style={styles.arrow}>↗</Text>
+                        </View>
                       </View>
                     </View>
-
-                    <View style={styles.arrowCircle}>
-                      <Text style={styles.arrow}>↗</Text>
-                    </View>
-                  </View>
-                </View>
-              </Card>
-            </Pressable>
-          ))}
-        </View>
+                  </Card>
+                </Pressable>
+              ))}
+            </View>
+          )}
+        </>
       )}
 
       <View style={styles.historySection}>

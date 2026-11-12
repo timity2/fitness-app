@@ -18,7 +18,7 @@ import {
 
 import Button from '../components/Button';
 import Card from '../components/Card';
-import { saveWorkout } from '../services/workoutStorage';
+import useWorkoutStore from '../store/useWorkoutStore';
 
 const EXERCISES = [
   { name: 'PUSH-UPS', sets: 3, reps: '12 REPS' },
@@ -30,12 +30,16 @@ const EXERCISES = [
 export default function ActiveWorkoutScreen() {
   const route = useRoute();
   const navigation = useNavigation();
+  const updateWorkout = useWorkoutStore((state) => state.updateWorkout);
+  const addWorkout = useWorkoutStore((state) => state.addWorkout);
 
   const workout = route.params?.workout || {
     title: 'FULL BODY',
-    duration: '45 MIN',
+    name: 'FULL BODY',
+    duration: 45,
     category: 'STRENGTH',
     level: 'INTERMEDIATE',
+    exercises: EXERCISES,
   };
 
   const [currentExercise, setCurrentExercise] = useState(0);
@@ -82,12 +86,43 @@ export default function ActiveWorkoutScreen() {
     setIsRunning(false);
     setIsSaving(true);
 
-    const result = await saveWorkout({
-      title: workout.title,
-      category: workout.category,
-      durationSeconds: seconds,
+    const completedAt = new Date().toISOString();
+    const durationMinutes = Math.max(1, Math.ceil(seconds / 60));
+    const workoutData = {
+      name: workout.name || workout.title || 'Тренировка',
+      category: workout.category || 'Общая',
+      level: workout.level || 'Начальный',
+      duration: durationMinutes,
+      calories: workout.calories || 0,
+      status: 'completed',
+      completedAt,
       exercisesCompleted: currentExercise + 1,
-    });
+    };
+
+    let result;
+
+    try {
+      if (workout.id) {
+        result = await updateWorkout(workout.id, {
+          ...workoutData,
+          statusHistory: [
+            ...(workout.statusHistory || []),
+            { status: 'completed', date: completedAt },
+          ],
+        });
+      } else {
+        result = await addWorkout({
+          ...workoutData,
+          priority: 'medium',
+          exercises: workout.exercises || EXERCISES,
+          trainer: null,
+          location: null,
+          image: null,
+        });
+      }
+    } catch (error) {
+      result = null;
+    }
 
     setIsSaving(false);
 

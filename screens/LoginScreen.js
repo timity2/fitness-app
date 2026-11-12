@@ -55,7 +55,6 @@ export default function LoginScreen() {
       login(safeUser);
       navigation.replace('Main');
     } catch (error) {
-      console.error('Login error:', error);
       Alert.alert('Ошибка', 'Не удалось выполнить вход.');
     } finally {
       setLoading(false);
