@@ -1,0 +1,2092 @@
+{
+ "exercise_categories": [
+  {
+   "id": "7c3ba719-dfa1-591c-adc4-d3a3d77e0a5a",
+   "slug": "chest",
+   "name": "Грудь",
+   "sort_order": 1,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "eed9c5e0-7182-5e6d-af6f-b36d856c736c",
+   "slug": "back",
+   "name": "Спина",
+   "sort_order": 2,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "cbf91755-31b9-50e1-ac91-8869577348c1",
+   "slug": "legs",
+   "name": "Ноги",
+   "sort_order": 3,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "120e3a65-8ea4-52ce-a0fe-08ecf40f62d4",
+   "slug": "shoulders",
+   "name": "Плечи",
+   "sort_order": 4,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b918d7ee-befa-5430-ae03-fc249c7f219c",
+   "slug": "biceps",
+   "name": "Бицепс",
+   "sort_order": 5,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b53eb261-3512-550e-ad14-5e10e7aa8666",
+   "slug": "triceps",
+   "name": "Трицепс",
+   "sort_order": 6,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "4ac6be33-91bf-5a97-a601-894bece74b2e",
+   "slug": "abs",
+   "name": "Пресс",
+   "sort_order": 7,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "a9d0f342-022e-525b-ab69-3b8b987ee798",
+   "slug": "cardio",
+   "name": "Кардио",
+   "sort_order": 8,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "slug": "full-body",
+   "name": "Всё тело",
+   "sort_order": 9,
+   "is_demo": true,
+   "created_at": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "913e0102-b15c-5d3c-ac76-ae082829a671",
+   "category_id": "7c3ba719-dfa1-591c-adc4-d3a3d77e0a5a",
+   "name": "Жим штанги лёжа",
+   "description": "Базовое упражнение для развития силы и массы грудных мышц.",
+   "technique": "Лягте на скамью, сведите лопатки и упритесь стопами в пол. Возьмите гриф чуть шире плеч, опустите его к нижней части груди и выжмите вверх, не отрывая таз от скамьи.",
+   "primary_muscles": [
+    "Грудные",
+    "Трицепс",
+    "Передние дельты"
+   ],
+   "equipment": "barbell",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 8,
+   "default_rest_sec": 120,
+   "tips": [
+    "Держите лопатки сведёнными весь подход",
+    "Опускайте гриф подконтрольно, 2–3 секунды"
+   ],
+   "mistakes": [
+    "Отбив грифа от груди",
+    "Отрыв таза от скамьи",
+    "Слишком широко разведённые локти"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "1c69f839-ee82-5177-a42b-84609b6dc4bd",
+   "category_id": "7c3ba719-dfa1-591c-adc4-d3a3d77e0a5a",
+   "name": "Отжимания от пола",
+   "description": "Упражнение с собственным весом, подходит для дома.",
+   "technique": "Примите упор лёжа, ладони чуть шире плеч. Опускайтесь, сгибая локти под углом около 45° к корпусу, до касания грудью пола и вернитесь в исходное положение.",
+   "primary_muscles": [
+    "Грудные",
+    "Трицепс",
+    "Кор"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 15,
+   "default_rest_sec": 60,
+   "tips": [
+    "Держите корпус прямой линией",
+    "Если тяжело — выполняйте с колен"
+   ],
+   "mistakes": [
+    "Провисание поясницы",
+    "Неполная амплитуда",
+    "Задранная голова"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "99e95162-f1a0-521b-a4cf-4febff830441",
+   "category_id": "7c3ba719-dfa1-591c-adc4-d3a3d77e0a5a",
+   "name": "Разведение гантелей лёжа",
+   "description": "Изолирующее упражнение на растяжение и сокращение грудных мышц.",
+   "technique": "Лёжа на скамье, поднимите гантели над грудью. Слегка согнув локти, разведите руки в стороны до комфортного растяжения и сведите обратно по дуге.",
+   "primary_muscles": [
+    "Грудные"
+   ],
+   "equipment": "dumbbells",
+   "difficulty": "intermediate",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 75,
+   "tips": [
+    "Сохраняйте небольшой сгиб в локтях",
+    "Выбирайте умеренный вес"
+   ],
+   "mistakes": [
+    "Слишком тяжёлые гантели",
+    "Выпрямление рук в локтях",
+    "Резкое движение в нижней точке"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "37bb484d-92c1-5596-a824-fe6d85729d7d",
+   "category_id": "eed9c5e0-7182-5e6d-af6f-b36d856c736c",
+   "name": "Подтягивания",
+   "description": "Классическое упражнение для ширины спины.",
+   "technique": "Возьмитесь за перекладину хватом чуть шире плеч. Сведите лопатки и подтянитесь до уровня подбородка над перекладиной, затем плавно опуститесь.",
+   "primary_muscles": [
+    "Широчайшие",
+    "Бицепс",
+    "Ромбовидные"
+   ],
+   "equipment": "bar",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 8,
+   "default_rest_sec": 120,
+   "tips": [
+    "Начинайте движение со сведения лопаток",
+    "Не раскачивайтесь"
+   ],
+   "mistakes": [
+    "Рывки и раскачка",
+    "Неполное выпрямление рук внизу",
+    "Подъём плеч к ушам"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "65a8c0de-e0b9-516f-ae99-dafce48c41d4",
+   "category_id": "eed9c5e0-7182-5e6d-af6f-b36d856c736c",
+   "name": "Тяга штанги в наклоне",
+   "description": "Базовая тяга для толщины спины.",
+   "technique": "Наклонитесь с прямой спиной до угла около 45°, колени слегка согнуты. Тяните гриф к поясу, сводя лопатки, и подконтрольно опускайте.",
+   "primary_muscles": [
+    "Широчайшие",
+    "Трапеции",
+    "Задние дельты"
+   ],
+   "equipment": "barbell",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 10,
+   "default_rest_sec": 90,
+   "tips": [
+    "Спина остаётся прямой",
+    "Тяните локтями, а не кистями"
+   ],
+   "mistakes": [
+    "Округление поясницы",
+    "Рывки корпусом",
+    "Слишком большой вес"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b2ec5374-39dc-5e85-aaa7-a4dcf02b4f0a",
+   "category_id": "eed9c5e0-7182-5e6d-af6f-b36d856c736c",
+   "name": "Тяга верхнего блока",
+   "description": "Упражнение в тренажёре, заменяет подтягивания для начинающих.",
+   "technique": "Сядьте в тренажёр, зафиксируйте бёдра. Тяните рукоять к верхней части груди, слегка прогнувшись, и плавно возвращайте вверх.",
+   "primary_muscles": [
+    "Широчайшие",
+    "Бицепс"
+   ],
+   "equipment": "machine",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 75,
+   "tips": [
+    "Не отклоняйтесь назад слишком сильно",
+    "Опускайте плечи вниз перед тягой"
+   ],
+   "mistakes": [
+    "Тяга за голову",
+    "Раскачка корпусом",
+    "Бросание веса вверх"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "368ba098-acb2-50e1-a5b1-f3959b333b84",
+   "category_id": "cbf91755-31b9-50e1-ac91-8869577348c1",
+   "name": "Приседания со штангой",
+   "description": "Главное базовое упражнение для ног.",
+   "technique": "Расположите гриф на трапециях, стопы на ширине плеч. Опускайтесь, отводя таз назад, до параллели бёдер с полом и вставайте, сохраняя спину прямой.",
+   "primary_muscles": [
+    "Квадрицепсы",
+    "Ягодичные",
+    "Бицепс бедра"
+   ],
+   "equipment": "barbell",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 8,
+   "default_rest_sec": 150,
+   "tips": [
+    "Колени направлены в сторону носков",
+    "Вес распределён на всю стопу"
+   ],
+   "mistakes": [
+    "Сведение коленей внутрь",
+    "Отрыв пяток",
+    "Округление спины"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "d26c1141-d01d-526b-af56-5af49b3a839a",
+   "category_id": "cbf91755-31b9-50e1-ac91-8869577348c1",
+   "name": "Выпады",
+   "description": "Упражнение для ног и баланса, выполняется с гантелями или без веса.",
+   "technique": "Сделайте шаг вперёд и опуститесь, пока оба колена не согнутся примерно до 90°. Оттолкнитесь передней ногой и вернитесь в исходное положение.",
+   "primary_muscles": [
+    "Квадрицепсы",
+    "Ягодичные"
+   ],
+   "equipment": "dumbbells",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 75,
+   "tips": [
+    "Держите корпус вертикально",
+    "Шаг достаточно широкий"
+   ],
+   "mistakes": [
+    "Колено уходит далеко за носок",
+    "Наклон корпуса вперёд",
+    "Слишком короткий шаг"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "44507cb2-8b5f-5d54-ad81-c9f764ec557d",
+   "category_id": "cbf91755-31b9-50e1-ac91-8869577348c1",
+   "name": "Ягодичный мост",
+   "description": "Упражнение для ягодиц, подходит для дома.",
+   "technique": "Лёжа на спине, согните колени и поставьте стопы на пол. Поднимайте таз до прямой линии от плеч до коленей, задержитесь на секунду и опуститесь.",
+   "primary_muscles": [
+    "Ягодичные",
+    "Бицепс бедра"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 15,
+   "default_rest_sec": 60,
+   "tips": [
+    "Сжимайте ягодицы в верхней точке",
+    "Не переразгибайте поясницу"
+   ],
+   "mistakes": [
+    "Толчок поясницей",
+    "Стопы слишком далеко от таза"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b8aa9498-2b9d-5748-a2bb-0b91126dbc76",
+   "category_id": "120e3a65-8ea4-52ce-a0fe-08ecf40f62d4",
+   "name": "Жим штанги стоя",
+   "description": "Базовый жим для силы плечевого пояса.",
+   "technique": "Стоя, удерживайте гриф на уровне ключиц. Выжмите штангу над головой до выпрямления рук и плавно опустите обратно.",
+   "primary_muscles": [
+    "Дельты",
+    "Трицепс"
+   ],
+   "equipment": "barbell",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 8,
+   "default_rest_sec": 120,
+   "tips": [
+    "Напрягите пресс и ягодицы",
+    "Гриф движется по вертикали"
+   ],
+   "mistakes": [
+    "Сильный прогиб в пояснице",
+    "Помощь ногами",
+    "Локти уходят назад"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "a00877f9-e838-51a3-aa40-70d3b8d8453e",
+   "category_id": "120e3a65-8ea4-52ce-a0fe-08ecf40f62d4",
+   "name": "Махи гантелями в стороны",
+   "description": "Изолирующее упражнение для ширины плеч.",
+   "technique": "Стоя с гантелями по бокам, поднимайте руки через стороны до уровня плеч, слегка согнув локти, и плавно опускайте.",
+   "primary_muscles": [
+    "Средние дельты"
+   ],
+   "equipment": "dumbbells",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 15,
+   "default_rest_sec": 60,
+   "tips": [
+    "Локоть чуть выше кисти",
+    "Без раскачки корпусом"
+   ],
+   "mistakes": [
+    "Слишком тяжёлые гантели",
+    "Подъём выше плеч",
+    "Рывки"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "644aee43-7d0c-50ed-a67b-0a34880a5ce6",
+   "category_id": "120e3a65-8ea4-52ce-a0fe-08ecf40f62d4",
+   "name": "Отжимания «уголком»",
+   "description": "Домашняя альтернатива жиму над головой.",
+   "technique": "Встаньте в упор лёжа и поднимите таз вверх, образуя перевёрнутую букву V. Сгибая руки, опускайте голову к полу между ладонями и выжимайте себя обратно.",
+   "primary_muscles": [
+    "Дельты",
+    "Трицепс"
+   ],
+   "equipment": "none",
+   "difficulty": "intermediate",
+   "default_sets": 3,
+   "default_reps": 10,
+   "default_rest_sec": 75,
+   "tips": [
+    "Смотрите на стопы",
+    "Локти направлены назад"
+   ],
+   "mistakes": [
+    "Разведение локтей в стороны",
+    "Опускание таза"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "2e6bf8b1-7394-537b-aef2-9792f6a33c6e",
+   "category_id": "b918d7ee-befa-5430-ae03-fc249c7f219c",
+   "name": "Подъём штанги на бицепс",
+   "description": "Основное упражнение для бицепса.",
+   "technique": "Стоя, возьмите гриф хватом снизу на ширине плеч. Сгибайте руки, не отводя локти от корпуса, и подконтрольно опускайте.",
+   "primary_muscles": [
+    "Бицепс"
+   ],
+   "equipment": "barbell",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 60,
+   "tips": [
+    "Локти прижаты к корпусу",
+    "Опускайте медленно"
+   ],
+   "mistakes": [
+    "Раскачка корпусом",
+    "Неполное разгибание"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "3402dc41-5ffa-5a3b-a5b0-409441b67d0f",
+   "category_id": "b918d7ee-befa-5430-ae03-fc249c7f219c",
+   "name": "Молотки с гантелями",
+   "description": "Сгибания с нейтральным хватом для бицепса и предплечий.",
+   "technique": "Держите гантели ладонями друг к другу. Поочерёдно или одновременно сгибайте руки, сохраняя нейтральный хват.",
+   "primary_muscles": [
+    "Бицепс",
+    "Брахиалис"
+   ],
+   "equipment": "dumbbells",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 60,
+   "tips": [
+    "Не разворачивайте кисти",
+    "Корпус неподвижен"
+   ],
+   "mistakes": [
+    "Рывки",
+    "Локти уходят вперёд"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "28a43e01-0937-5b80-a7a8-f37bc8848400",
+   "category_id": "b918d7ee-befa-5430-ae03-fc249c7f219c",
+   "name": "Подтягивания обратным хватом",
+   "description": "Подтягивания с акцентом на бицепс.",
+   "technique": "Возьмитесь за перекладину хватом снизу на ширине плеч. Подтянитесь до подбородка над перекладиной и плавно опуститесь.",
+   "primary_muscles": [
+    "Бицепс",
+    "Широчайшие"
+   ],
+   "equipment": "bar",
+   "difficulty": "intermediate",
+   "default_sets": 3,
+   "default_reps": 8,
+   "default_rest_sec": 90,
+   "tips": [
+    "Полная амплитуда",
+    "Без раскачки"
+   ],
+   "mistakes": [
+    "Половинные повторения",
+    "Рывок ногами"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "a7ab4e6d-053a-5313-ae77-a261410fa2fb",
+   "category_id": "b53eb261-3512-550e-ad14-5e10e7aa8666",
+   "name": "Разгибания на блоке",
+   "description": "Изолирующее упражнение для трицепса.",
+   "technique": "Стоя у верхнего блока, прижмите локти к корпусу и разгибайте руки вниз до полного выпрямления, затем плавно вернитесь.",
+   "primary_muscles": [
+    "Трицепс"
+   ],
+   "equipment": "machine",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 60,
+   "tips": [
+    "Локти неподвижны",
+    "Задержка в нижней точке"
+   ],
+   "mistakes": [
+    "Движение плечами",
+    "Наклон корпуса на рукоять"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b4d66ff0-d0ee-5716-a727-09a722849aa8",
+   "category_id": "b53eb261-3512-550e-ad14-5e10e7aa8666",
+   "name": "Отжимания на брусьях",
+   "description": "Базовое упражнение с собственным весом.",
+   "technique": "В упоре на брусьях опускайтесь, сгибая локти до угла около 90°, корпус держите вертикально для акцента на трицепс, затем выжмите себя вверх.",
+   "primary_muscles": [
+    "Трицепс",
+    "Грудные"
+   ],
+   "equipment": "bar",
+   "difficulty": "intermediate",
+   "default_sets": 3,
+   "default_reps": 10,
+   "default_rest_sec": 90,
+   "tips": [
+    "Плечи опущены",
+    "Не опускайтесь слишком глубоко"
+   ],
+   "mistakes": [
+    "Чрезмерная глубина",
+    "Разведение локтей"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "47e3a52e-275a-52f2-a8a6-bf03864edcf8",
+   "category_id": "b53eb261-3512-550e-ad14-5e10e7aa8666",
+   "name": "Обратные отжимания от опоры",
+   "description": "Домашнее упражнение для трицепса от стула или скамьи.",
+   "technique": "Упритесь ладонями в край опоры за спиной, ноги вытяните вперёд. Сгибайте локти до 90° и выжимайте себя вверх.",
+   "primary_muscles": [
+    "Трицепс"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 12,
+   "default_rest_sec": 60,
+   "tips": [
+    "Спина близко к опоре",
+    "Локти направлены назад"
+   ],
+   "mistakes": [
+    "Плечи поднимаются к ушам",
+    "Слишком глубокое опускание"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "e6bc1f42-c83f-5ee0-a609-fd9bb4caa48b",
+   "category_id": "4ac6be33-91bf-5a97-a601-894bece74b2e",
+   "name": "Планка",
+   "description": "Статическое упражнение для мышц кора. Количество «повторений» — секунды удержания.",
+   "technique": "Упор на предплечья и носки, локти под плечами. Держите тело прямой линией, напрягая пресс и ягодицы.",
+   "primary_muscles": [
+    "Кор",
+    "Пресс"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 45,
+   "default_rest_sec": 45,
+   "tips": [
+    "Дышите ровно",
+    "Смотрите в пол"
+   ],
+   "mistakes": [
+    "Провисание поясницы",
+    "Поднятый таз"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "89cc388e-67ea-5026-a599-dea0065b68c9",
+   "category_id": "4ac6be33-91bf-5a97-a601-894bece74b2e",
+   "name": "Скручивания",
+   "description": "Классическое упражнение для пресса.",
+   "technique": "Лёжа на спине с согнутыми коленями, поднимайте лопатки от пола за счёт сокращения пресса и плавно опускайтесь.",
+   "primary_muscles": [
+    "Прямая мышца живота"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 20,
+   "default_rest_sec": 45,
+   "tips": [
+    "Поясница прижата к полу",
+    "Не тяните голову руками"
+   ],
+   "mistakes": [
+    "Рывок шеей",
+    "Подъём корпуса целиком"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "26fb21c0-8496-5f6d-a39d-e389e11d900f",
+   "category_id": "4ac6be33-91bf-5a97-a601-894bece74b2e",
+   "name": "Подъём ног лёжа",
+   "description": "Упражнение для нижней части пресса.",
+   "technique": "Лёжа на спине, поднимайте прямые ноги до вертикали и медленно опускайте, не касаясь пола.",
+   "primary_muscles": [
+    "Нижний пресс"
+   ],
+   "equipment": "none",
+   "difficulty": "intermediate",
+   "default_sets": 3,
+   "default_reps": 15,
+   "default_rest_sec": 60,
+   "tips": [
+    "Поясница прижата",
+    "Медленное опускание"
+   ],
+   "mistakes": [
+    "Прогиб в пояснице",
+    "Мах ногами"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "762a5a79-7e58-54e0-a999-7e298ba971cb",
+   "category_id": "a9d0f342-022e-525b-ab69-3b8b987ee798",
+   "name": "Бег",
+   "description": "Кардионагрузка в комфортном темпе. «Повторения» — минуты.",
+   "technique": "Бегите в темпе, при котором можете разговаривать. Приземляйтесь на среднюю часть стопы, держите корпус ровно.",
+   "primary_muscles": [
+    "Сердечно-сосудистая система",
+    "Ноги"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 1,
+   "default_reps": 20,
+   "default_rest_sec": 0,
+   "tips": [
+    "Начинайте с разминки",
+    "Контролируйте дыхание"
+   ],
+   "mistakes": [
+    "Слишком быстрый старт",
+    "Приземление на пятку с прямой ногой"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "37f4d08f-95df-5d8c-ace6-be4428f47f48",
+   "category_id": "a9d0f342-022e-525b-ab69-3b8b987ee798",
+   "name": "Скакалка",
+   "description": "Интенсивное кардио. «Повторения» — секунды работы.",
+   "technique": "Прыгайте на носках, вращая скакалку кистями. Локти прижаты к корпусу, прыжки невысокие.",
+   "primary_muscles": [
+    "Икры",
+    "Сердечно-сосудистая система"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 5,
+   "default_reps": 60,
+   "default_rest_sec": 30,
+   "tips": [
+    "Мягкое приземление",
+    "Вращение кистями"
+   ],
+   "mistakes": [
+    "Высокие прыжки",
+    "Вращение всей рукой"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "059956e0-29c7-5157-ae16-61680ec2b9ce",
+   "category_id": "a9d0f342-022e-525b-ab69-3b8b987ee798",
+   "name": "Бёрпи",
+   "description": "Комплексное упражнение высокой интенсивности.",
+   "technique": "Из положения стоя присядьте, поставьте ладони на пол, прыжком выйдите в упор лёжа, отожмитесь, прыжком подтяните ноги и выпрыгните вверх.",
+   "primary_muscles": [
+    "Всё тело"
+   ],
+   "equipment": "none",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 12,
+   "default_rest_sec": 60,
+   "tips": [
+    "Держите ровный темп",
+    "Напрягайте кор в упоре"
+   ],
+   "mistakes": [
+    "Провисание поясницы",
+    "Сбитое дыхание"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "609f60e0-36ba-57eb-a528-9a290a85f77d",
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Становая тяга",
+   "description": "Базовое упражнение для всей задней цепи.",
+   "technique": "Подойдите к штанге, стопы под грифом. С прямой спиной возьмитесь за гриф и поднимите штангу, разгибая ноги и корпус одновременно. Опускайте подконтрольно.",
+   "primary_muscles": [
+    "Спина",
+    "Ягодичные",
+    "Бицепс бедра"
+   ],
+   "equipment": "barbell",
+   "difficulty": "advanced",
+   "default_sets": 4,
+   "default_reps": 6,
+   "default_rest_sec": 180,
+   "tips": [
+    "Гриф скользит вдоль ног",
+    "Лопатки над грифом на старте"
+   ],
+   "mistakes": [
+    "Округление спины",
+    "Рывок со старта",
+    "Переразгибание вверху"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "bba98822-ee6f-57c5-a83a-0e3a62fd26f1",
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Махи гирей",
+   "description": "Взрывное упражнение для всего тела.",
+   "technique": "Отведите гирю назад между ног с прямой спиной и мощным разгибанием таза выбросьте её до уровня груди.",
+   "primary_muscles": [
+    "Ягодичные",
+    "Спина",
+    "Плечи"
+   ],
+   "equipment": "kettlebell",
+   "difficulty": "intermediate",
+   "default_sets": 4,
+   "default_reps": 15,
+   "default_rest_sec": 75,
+   "tips": [
+    "Движение идёт от таза",
+    "Руки лишь направляют гирю"
+   ],
+   "mistakes": [
+    "Подъём гири руками",
+    "Приседание вместо наклона"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "e9bee712-62b0-5ab0-acff-ea15268097b4",
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Альпинист",
+   "description": "Динамическое упражнение в упоре лёжа. «Повторения» — секунды.",
+   "technique": "В упоре лёжа поочерёдно подтягивайте колени к груди в быстром темпе, удерживая таз на одной высоте.",
+   "primary_muscles": [
+    "Кор",
+    "Плечи",
+    "Ноги"
+   ],
+   "equipment": "none",
+   "difficulty": "beginner",
+   "default_sets": 3,
+   "default_reps": 30,
+   "default_rest_sec": 45,
+   "tips": [
+    "Плечи над кистями",
+    "Ровное дыхание"
+   ],
+   "mistakes": [
+    "Поднятый таз",
+    "Провисание поясницы"
+   ],
+   "image_url": null,
+   "video_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "workout_programs": [
+  {
+   "id": "1bede798-f83a-5900-a780-644522a0306e",
+   "owner_id": null,
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Фитнес-план: всё тело",
+   "description": "Сбалансированная тренировка на все группы мышц для начинающих.",
+   "goal_type": "maintenance",
+   "difficulty": "beginner",
+   "duration_min": 40,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Ноги",
+    "Грудь",
+    "Спина",
+    "Кор"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "owner_id": null,
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Домашняя тренировка без инвентаря",
+   "description": "Круговая тренировка с собственным весом, не требует оборудования.",
+   "goal_type": "weight_loss",
+   "difficulty": "beginner",
+   "duration_min": 30,
+   "location": "home",
+   "workout_type": "hiit",
+   "target_muscles": [
+    "Всё тело"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "13ed32c5-cdba-579b-af80-262127f09f80",
+   "owner_id": null,
+   "category_id": "7c3ba719-dfa1-591c-adc4-d3a3d77e0a5a",
+   "name": "Грудь и трицепс",
+   "description": "Силовая тренировка на грудные мышцы и трицепс.",
+   "goal_type": "muscle_gain",
+   "difficulty": "intermediate",
+   "duration_min": 55,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Грудные",
+    "Трицепс"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "owner_id": null,
+   "category_id": "eed9c5e0-7182-5e6d-af6f-b36d856c736c",
+   "name": "Спина и бицепс",
+   "description": "Тяговая тренировка для спины и рук.",
+   "goal_type": "muscle_gain",
+   "difficulty": "intermediate",
+   "duration_min": 55,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Широчайшие",
+    "Бицепс"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "0212a139-f696-592c-aec2-a3ce925a228c",
+   "owner_id": null,
+   "category_id": "cbf91755-31b9-50e1-ac91-8869577348c1",
+   "name": "День ног",
+   "description": "Тренировка нижней части тела с базовыми упражнениями.",
+   "goal_type": "strength",
+   "difficulty": "intermediate",
+   "duration_min": 50,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Квадрицепсы",
+    "Ягодичные"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "289d04a3-96a6-52c9-a442-f59101a8989f",
+   "owner_id": null,
+   "category_id": "120e3a65-8ea4-52ce-a0fe-08ecf40f62d4",
+   "name": "Сильные плечи",
+   "description": "Акцент на плечевой пояс.",
+   "goal_type": "muscle_gain",
+   "difficulty": "intermediate",
+   "duration_min": 40,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Дельты",
+    "Трицепс"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "cc7e50e6-b614-5211-a0c7-1f4c24d738ce",
+   "owner_id": null,
+   "category_id": "4ac6be33-91bf-5a97-a601-894bece74b2e",
+   "name": "Пресс за 15 минут",
+   "description": "Короткая тренировка для мышц кора.",
+   "goal_type": "maintenance",
+   "difficulty": "beginner",
+   "duration_min": 15,
+   "location": "home",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Пресс",
+    "Кор"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "bfee6d8a-5412-5aea-a8d9-3d4f844e8152",
+   "owner_id": null,
+   "category_id": "a9d0f342-022e-525b-ab69-3b8b987ee798",
+   "name": "Кардио-интервалы",
+   "description": "Интервальная кардиотренировка для выносливости.",
+   "goal_type": "endurance",
+   "difficulty": "intermediate",
+   "duration_min": 25,
+   "location": "home",
+   "workout_type": "cardio",
+   "target_muscles": [
+    "Сердечно-сосудистая система"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "ebe59ab6-6c62-559d-a222-4132fa695f1d",
+   "owner_id": null,
+   "category_id": "ed200fc1-6dfa-576d-a78a-9beac762859d",
+   "name": "Силовая база",
+   "description": "Три главных базовых движения с большими весами.",
+   "goal_type": "strength",
+   "difficulty": "advanced",
+   "duration_min": 70,
+   "location": "gym",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Спина",
+    "Ноги",
+    "Грудь"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "9c5840e4-9a59-5c5c-a34f-189dc53fbd72",
+   "owner_id": null,
+   "category_id": "b918d7ee-befa-5430-ae03-fc249c7f219c",
+   "name": "Руки дома",
+   "description": "Тренировка рук с гантелями в домашних условиях.",
+   "goal_type": "muscle_gain",
+   "difficulty": "beginner",
+   "duration_min": 30,
+   "location": "home",
+   "workout_type": "strength",
+   "target_muscles": [
+    "Бицепс",
+    "Трицепс"
+   ],
+   "image_url": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "workout_exercises": [
+  {
+   "id": "ef0770bb-d78a-54cc-ac05-f3846288935d",
+   "program_id": "1bede798-f83a-5900-a780-644522a0306e",
+   "exercise_id": "368ba098-acb2-50e1-a5b1-f3959b333b84",
+   "position": 0,
+   "sets": 3,
+   "reps": 10,
+   "rest_sec": 120
+  },
+  {
+   "id": "fc9febc9-c6bb-538a-a057-012ba4827190",
+   "program_id": "1bede798-f83a-5900-a780-644522a0306e",
+   "exercise_id": "913e0102-b15c-5d3c-ac76-ae082829a671",
+   "position": 1,
+   "sets": 3,
+   "reps": 10,
+   "rest_sec": 120
+  },
+  {
+   "id": "4f75c2af-afa1-5e09-a503-bcfb4a91438a",
+   "program_id": "1bede798-f83a-5900-a780-644522a0306e",
+   "exercise_id": "b2ec5374-39dc-5e85-aaa7-a4dcf02b4f0a",
+   "position": 2,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 75
+  },
+  {
+   "id": "dd5bdb9d-f6b6-56f7-a8b5-9e1034278129",
+   "program_id": "1bede798-f83a-5900-a780-644522a0306e",
+   "exercise_id": "a00877f9-e838-51a3-aa40-70d3b8d8453e",
+   "position": 3,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 60
+  },
+  {
+   "id": "4907b628-2de2-59c6-a69e-3ce6026a4569",
+   "program_id": "1bede798-f83a-5900-a780-644522a0306e",
+   "exercise_id": "e6bc1f42-c83f-5ee0-a609-fd9bb4caa48b",
+   "position": 4,
+   "sets": 3,
+   "reps": 45,
+   "rest_sec": 45
+  },
+  {
+   "id": "7c1a6c3e-aa48-52e0-a2df-e250dcc4f920",
+   "program_id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "exercise_id": "1c69f839-ee82-5177-a42b-84609b6dc4bd",
+   "position": 0,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 45
+  },
+  {
+   "id": "cf2ef808-1101-52a8-ab1e-d68ecef83cff",
+   "program_id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "exercise_id": "44507cb2-8b5f-5d54-ad81-c9f764ec557d",
+   "position": 1,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 45
+  },
+  {
+   "id": "de3d478d-03e8-555f-a0c4-bb46e4cf8c34",
+   "program_id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "exercise_id": "e9bee712-62b0-5ab0-acff-ea15268097b4",
+   "position": 2,
+   "sets": 3,
+   "reps": 30,
+   "rest_sec": 45
+  },
+  {
+   "id": "f3be94c3-8499-5124-a911-5e6719ab62fd",
+   "program_id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "exercise_id": "47e3a52e-275a-52f2-a8a6-bf03864edcf8",
+   "position": 3,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 45
+  },
+  {
+   "id": "0d37a679-fedc-5893-a068-7531131b819a",
+   "program_id": "86b58763-3cb6-53b5-ae97-5a7fffb545bf",
+   "exercise_id": "89cc388e-67ea-5026-a599-dea0065b68c9",
+   "position": 4,
+   "sets": 3,
+   "reps": 20,
+   "rest_sec": 45
+  },
+  {
+   "id": "a9b60518-40ad-5f1d-a81f-62bfee3033c1",
+   "program_id": "13ed32c5-cdba-579b-af80-262127f09f80",
+   "exercise_id": "913e0102-b15c-5d3c-ac76-ae082829a671",
+   "position": 0,
+   "sets": 4,
+   "reps": 8,
+   "rest_sec": 120
+  },
+  {
+   "id": "6b172c9a-6605-5f4a-a178-36a30a8f6953",
+   "program_id": "13ed32c5-cdba-579b-af80-262127f09f80",
+   "exercise_id": "99e95162-f1a0-521b-a4cf-4febff830441",
+   "position": 1,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 75
+  },
+  {
+   "id": "795f2559-d00d-59d6-a4f8-4955901c2914",
+   "program_id": "13ed32c5-cdba-579b-af80-262127f09f80",
+   "exercise_id": "b4d66ff0-d0ee-5716-a727-09a722849aa8",
+   "position": 2,
+   "sets": 3,
+   "reps": 10,
+   "rest_sec": 90
+  },
+  {
+   "id": "cec8284e-cd53-528d-a62b-7b8627b6e19d",
+   "program_id": "13ed32c5-cdba-579b-af80-262127f09f80",
+   "exercise_id": "a7ab4e6d-053a-5313-ae77-a261410fa2fb",
+   "position": 3,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "c7eb7239-6280-56a7-a72b-736ad491b08a",
+   "program_id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "exercise_id": "37bb484d-92c1-5596-a824-fe6d85729d7d",
+   "position": 0,
+   "sets": 4,
+   "reps": 8,
+   "rest_sec": 120
+  },
+  {
+   "id": "fd4c3cdb-25dd-5de5-a157-7ac429f2da21",
+   "program_id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "exercise_id": "65a8c0de-e0b9-516f-ae99-dafce48c41d4",
+   "position": 1,
+   "sets": 4,
+   "reps": 10,
+   "rest_sec": 90
+  },
+  {
+   "id": "c3a99471-ccbb-5ba7-a390-a21a740cef13",
+   "program_id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "exercise_id": "b2ec5374-39dc-5e85-aaa7-a4dcf02b4f0a",
+   "position": 2,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 75
+  },
+  {
+   "id": "580fcf97-2223-5f29-a0fe-63f642651678",
+   "program_id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "exercise_id": "2e6bf8b1-7394-537b-aef2-9792f6a33c6e",
+   "position": 3,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "9e0870b0-0e95-5d9b-aba7-1fc37309817d",
+   "program_id": "8ca9a890-db46-52d5-aa00-5f87dac46de6",
+   "exercise_id": "3402dc41-5ffa-5a3b-a5b0-409441b67d0f",
+   "position": 4,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "c8515a3e-0118-5d2c-a526-0ee6fe01ecfd",
+   "program_id": "0212a139-f696-592c-aec2-a3ce925a228c",
+   "exercise_id": "368ba098-acb2-50e1-a5b1-f3959b333b84",
+   "position": 0,
+   "sets": 4,
+   "reps": 8,
+   "rest_sec": 150
+  },
+  {
+   "id": "c5750a48-429b-51ff-ac28-8692ce2e5b67",
+   "program_id": "0212a139-f696-592c-aec2-a3ce925a228c",
+   "exercise_id": "d26c1141-d01d-526b-af56-5af49b3a839a",
+   "position": 1,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 75
+  },
+  {
+   "id": "0c6473d0-7f2f-5f1c-a186-4db6643d25c7",
+   "program_id": "0212a139-f696-592c-aec2-a3ce925a228c",
+   "exercise_id": "44507cb2-8b5f-5d54-ad81-c9f764ec557d",
+   "position": 2,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 60
+  },
+  {
+   "id": "dafc0a64-e18f-5b30-ae71-b257f86f4686",
+   "program_id": "0212a139-f696-592c-aec2-a3ce925a228c",
+   "exercise_id": "26fb21c0-8496-5f6d-a39d-e389e11d900f",
+   "position": 3,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 60
+  },
+  {
+   "id": "adb848a9-1f0c-516c-ab95-c3c9d81dae67",
+   "program_id": "289d04a3-96a6-52c9-a442-f59101a8989f",
+   "exercise_id": "b8aa9498-2b9d-5748-a2bb-0b91126dbc76",
+   "position": 0,
+   "sets": 4,
+   "reps": 8,
+   "rest_sec": 120
+  },
+  {
+   "id": "285dc508-4261-55cb-a12d-5e01784dec91",
+   "program_id": "289d04a3-96a6-52c9-a442-f59101a8989f",
+   "exercise_id": "a00877f9-e838-51a3-aa40-70d3b8d8453e",
+   "position": 1,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 60
+  },
+  {
+   "id": "ae2e9dad-e171-56d0-aaea-ecdc54f12fb1",
+   "program_id": "289d04a3-96a6-52c9-a442-f59101a8989f",
+   "exercise_id": "644aee43-7d0c-50ed-a67b-0a34880a5ce6",
+   "position": 2,
+   "sets": 3,
+   "reps": 10,
+   "rest_sec": 75
+  },
+  {
+   "id": "5b053748-a618-54bc-aed4-9801795ac61e",
+   "program_id": "cc7e50e6-b614-5211-a0c7-1f4c24d738ce",
+   "exercise_id": "e6bc1f42-c83f-5ee0-a609-fd9bb4caa48b",
+   "position": 0,
+   "sets": 3,
+   "reps": 45,
+   "rest_sec": 30
+  },
+  {
+   "id": "0062769a-2444-59fd-a5b8-03b9740d2ad4",
+   "program_id": "cc7e50e6-b614-5211-a0c7-1f4c24d738ce",
+   "exercise_id": "89cc388e-67ea-5026-a599-dea0065b68c9",
+   "position": 1,
+   "sets": 3,
+   "reps": 20,
+   "rest_sec": 30
+  },
+  {
+   "id": "7412ebd9-00b4-5b03-a8b4-a2d0aafd1c39",
+   "program_id": "cc7e50e6-b614-5211-a0c7-1f4c24d738ce",
+   "exercise_id": "26fb21c0-8496-5f6d-a39d-e389e11d900f",
+   "position": 2,
+   "sets": 3,
+   "reps": 15,
+   "rest_sec": 45
+  },
+  {
+   "id": "122e520d-849d-5385-a79b-3ec6625f4782",
+   "program_id": "bfee6d8a-5412-5aea-a8d9-3d4f844e8152",
+   "exercise_id": "37f4d08f-95df-5d8c-ace6-be4428f47f48",
+   "position": 0,
+   "sets": 5,
+   "reps": 60,
+   "rest_sec": 30
+  },
+  {
+   "id": "acfa7435-05ca-5b52-aa34-5d9765f27ba0",
+   "program_id": "bfee6d8a-5412-5aea-a8d9-3d4f844e8152",
+   "exercise_id": "059956e0-29c7-5157-ae16-61680ec2b9ce",
+   "position": 1,
+   "sets": 4,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "8a27ccd2-16de-5dc8-a368-8a1b653cf3af",
+   "program_id": "bfee6d8a-5412-5aea-a8d9-3d4f844e8152",
+   "exercise_id": "e9bee712-62b0-5ab0-acff-ea15268097b4",
+   "position": 2,
+   "sets": 3,
+   "reps": 30,
+   "rest_sec": 45
+  },
+  {
+   "id": "82c6ff92-d066-5618-a960-48f2fcc36a33",
+   "program_id": "ebe59ab6-6c62-559d-a222-4132fa695f1d",
+   "exercise_id": "368ba098-acb2-50e1-a5b1-f3959b333b84",
+   "position": 0,
+   "sets": 5,
+   "reps": 5,
+   "rest_sec": 180
+  },
+  {
+   "id": "cc56dd36-6b4c-5078-a140-0fbd6880413e",
+   "program_id": "ebe59ab6-6c62-559d-a222-4132fa695f1d",
+   "exercise_id": "913e0102-b15c-5d3c-ac76-ae082829a671",
+   "position": 1,
+   "sets": 5,
+   "reps": 5,
+   "rest_sec": 180
+  },
+  {
+   "id": "68f6cbb3-8df4-5a06-aa4c-edd3290cb9fd",
+   "program_id": "ebe59ab6-6c62-559d-a222-4132fa695f1d",
+   "exercise_id": "609f60e0-36ba-57eb-a528-9a290a85f77d",
+   "position": 2,
+   "sets": 4,
+   "reps": 5,
+   "rest_sec": 180
+  },
+  {
+   "id": "e3627086-e9cd-5141-af2a-1863707a3752",
+   "program_id": "9c5840e4-9a59-5c5c-a34f-189dc53fbd72",
+   "exercise_id": "3402dc41-5ffa-5a3b-a5b0-409441b67d0f",
+   "position": 0,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "c408486b-bb3b-5140-a4cd-102625b71d75",
+   "program_id": "9c5840e4-9a59-5c5c-a34f-189dc53fbd72",
+   "exercise_id": "47e3a52e-275a-52f2-a8a6-bf03864edcf8",
+   "position": 1,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  },
+  {
+   "id": "51f710f4-763d-5c0f-afe8-587e9d4cfa13",
+   "program_id": "9c5840e4-9a59-5c5c-a34f-189dc53fbd72",
+   "exercise_id": "1c69f839-ee82-5177-a42b-84609b6dc4bd",
+   "position": 2,
+   "sets": 3,
+   "reps": 12,
+   "rest_sec": 60
+  }
+ ],
+ "food_products": [
+  {
+   "id": "536ccbb3-3d58-53c0-a6a4-491b76cb9408",
+   "owner_id": null,
+   "name": "Куриная грудка отварная",
+   "category": "meat",
+   "kcal_100": 137,
+   "protein_100": 29.8,
+   "fat_100": 1.8,
+   "carbs_100": 0.5,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "a542afbc-11f5-57a8-a21c-cddfa4778e26",
+   "owner_id": null,
+   "name": "Говядина тушёная",
+   "category": "meat",
+   "kcal_100": 232,
+   "protein_100": 16.8,
+   "fat_100": 18.3,
+   "carbs_100": 0,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b6236049-f02a-587b-af98-83375d057fac",
+   "owner_id": null,
+   "name": "Индейка, филе запечённое",
+   "category": "meat",
+   "kcal_100": 130,
+   "protein_100": 25,
+   "fat_100": 2.5,
+   "carbs_100": 0,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "0bd7372e-8e72-5ef3-a1b1-0b52ca6bf719",
+   "owner_id": null,
+   "name": "Лосось запечённый",
+   "category": "fish",
+   "kcal_100": 197,
+   "protein_100": 22,
+   "fat_100": 12,
+   "carbs_100": 0,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "bb0e3b95-aeaa-5a0d-a856-249634fcc7e2",
+   "owner_id": null,
+   "name": "Тунец консервированный в собственном соку",
+   "category": "fish",
+   "kcal_100": 96,
+   "protein_100": 21,
+   "fat_100": 1.2,
+   "carbs_100": 0,
+   "serving_g": 100,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "dc06bb93-90b8-5a27-a4f0-ed62e6c57312",
+   "owner_id": null,
+   "name": "Яйцо куриное варёное",
+   "category": "dairy",
+   "kcal_100": 155,
+   "protein_100": 12.7,
+   "fat_100": 10.9,
+   "carbs_100": 0.7,
+   "serving_g": 55,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "2258d6fa-41fc-504d-a108-ca9ceff38982",
+   "owner_id": null,
+   "name": "Творог 5%",
+   "category": "dairy",
+   "kcal_100": 121,
+   "protein_100": 17.2,
+   "fat_100": 5,
+   "carbs_100": 1.8,
+   "serving_g": 180,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "b47c3eb3-fa91-5a42-ab41-8a63f05397f2",
+   "owner_id": null,
+   "name": "Молоко 2,5%",
+   "category": "dairy",
+   "kcal_100": 52,
+   "protein_100": 2.8,
+   "fat_100": 2.5,
+   "carbs_100": 4.7,
+   "serving_g": 250,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "2eeb7943-1cac-56a9-ad73-7569918076d1",
+   "owner_id": null,
+   "name": "Йогурт греческий 2%",
+   "category": "dairy",
+   "kcal_100": 66,
+   "protein_100": 8,
+   "fat_100": 2,
+   "carbs_100": 3.6,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "6dc990d5-cfe1-500e-a388-298eb862f2f3",
+   "owner_id": null,
+   "name": "Сыр твёрдый",
+   "category": "dairy",
+   "kcal_100": 350,
+   "protein_100": 25,
+   "fat_100": 27,
+   "carbs_100": 0,
+   "serving_g": 30,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "6983b7f2-d6a8-54d8-a1fd-3c8b78e4bd66",
+   "owner_id": null,
+   "name": "Овсяная каша на воде",
+   "category": "grains",
+   "kcal_100": 88,
+   "protein_100": 3,
+   "fat_100": 1.7,
+   "carbs_100": 15,
+   "serving_g": 250,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "cd54bc4b-6e2b-572f-a084-b4775750d16b",
+   "owner_id": null,
+   "name": "Гречка отварная",
+   "category": "grains",
+   "kcal_100": 110,
+   "protein_100": 4.2,
+   "fat_100": 1.1,
+   "carbs_100": 21.3,
+   "serving_g": 200,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "ee8b4342-2c9b-5f80-af89-b933fa6e4b34",
+   "owner_id": null,
+   "name": "Рис белый отварной",
+   "category": "grains",
+   "kcal_100": 116,
+   "protein_100": 2.2,
+   "fat_100": 0.5,
+   "carbs_100": 24.9,
+   "serving_g": 200,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "6b201385-eed9-5678-a557-67286cf73c74",
+   "owner_id": null,
+   "name": "Макароны отварные",
+   "category": "grains",
+   "kcal_100": 112,
+   "protein_100": 3.5,
+   "fat_100": 0.4,
+   "carbs_100": 23.2,
+   "serving_g": 200,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "27472735-ab7f-53a5-af89-c0ea495afa04",
+   "owner_id": null,
+   "name": "Хлеб цельнозерновой",
+   "category": "grains",
+   "kcal_100": 247,
+   "protein_100": 13,
+   "fat_100": 3.4,
+   "carbs_100": 41,
+   "serving_g": 30,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "13d55348-f4ef-5e4b-a771-c4844f31166b",
+   "owner_id": null,
+   "name": "Картофель отварной",
+   "category": "vegetables",
+   "kcal_100": 82,
+   "protein_100": 2,
+   "fat_100": 0.4,
+   "carbs_100": 16.7,
+   "serving_g": 200,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "87f9c578-d0a6-5df9-a53a-9984659b32fd",
+   "owner_id": null,
+   "name": "Брокколи отварная",
+   "category": "vegetables",
+   "kcal_100": 35,
+   "protein_100": 2.4,
+   "fat_100": 0.4,
+   "carbs_100": 7.2,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "409b8b5c-9071-54c4-a6ee-88eb48d1e318",
+   "owner_id": null,
+   "name": "Огурец свежий",
+   "category": "vegetables",
+   "kcal_100": 15,
+   "protein_100": 0.8,
+   "fat_100": 0.1,
+   "carbs_100": 2.8,
+   "serving_g": 120,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "57cb47ab-148b-5bf9-a017-cf3ff5f4023a",
+   "owner_id": null,
+   "name": "Помидор свежий",
+   "category": "vegetables",
+   "kcal_100": 20,
+   "protein_100": 1.1,
+   "fat_100": 0.2,
+   "carbs_100": 3.7,
+   "serving_g": 120,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "2a1d4339-7013-5ee0-a3dd-52b84ae34950",
+   "owner_id": null,
+   "name": "Салат листовой",
+   "category": "vegetables",
+   "kcal_100": 14,
+   "protein_100": 1.2,
+   "fat_100": 0.2,
+   "carbs_100": 1.3,
+   "serving_g": 50,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "9ee43642-2aaf-54d4-a4d3-16789397bc79",
+   "owner_id": null,
+   "name": "Яблоко",
+   "category": "fruits",
+   "kcal_100": 47,
+   "protein_100": 0.4,
+   "fat_100": 0.4,
+   "carbs_100": 9.8,
+   "serving_g": 180,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "1a71d7d0-c211-573e-a664-75ad0882b2af",
+   "owner_id": null,
+   "name": "Банан",
+   "category": "fruits",
+   "kcal_100": 95,
+   "protein_100": 1.5,
+   "fat_100": 0.2,
+   "carbs_100": 21.8,
+   "serving_g": 120,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "e1461921-2daf-5421-a4a8-f72760abfc91",
+   "owner_id": null,
+   "name": "Апельсин",
+   "category": "fruits",
+   "kcal_100": 43,
+   "protein_100": 0.9,
+   "fat_100": 0.2,
+   "carbs_100": 8.1,
+   "serving_g": 150,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "96fe1664-d4cf-5cfa-afbe-8f9a7bfb901c",
+   "owner_id": null,
+   "name": "Авокадо",
+   "category": "fruits",
+   "kcal_100": 160,
+   "protein_100": 2,
+   "fat_100": 14.7,
+   "carbs_100": 1.8,
+   "serving_g": 100,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "67f9a6e0-f83b-5ebd-a3b3-bfb5ba4450dc",
+   "owner_id": null,
+   "name": "Миндаль",
+   "category": "nuts",
+   "kcal_100": 609,
+   "protein_100": 18.6,
+   "fat_100": 53.7,
+   "carbs_100": 13,
+   "serving_g": 30,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "2b8d696f-53a4-5381-a8a8-741165324256",
+   "owner_id": null,
+   "name": "Арахисовая паста",
+   "category": "nuts",
+   "kcal_100": 598,
+   "protein_100": 25,
+   "fat_100": 50,
+   "carbs_100": 20,
+   "serving_g": 20,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "5d0f5991-ed0d-59bb-a1fe-d3a488d6e8fe",
+   "owner_id": null,
+   "name": "Оливковое масло",
+   "category": "other",
+   "kcal_100": 898,
+   "protein_100": 0,
+   "fat_100": 99.8,
+   "carbs_100": 0,
+   "serving_g": 10,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "12120f96-4588-56e5-aa3a-a143da1163c7",
+   "owner_id": null,
+   "name": "Мёд",
+   "category": "other",
+   "kcal_100": 329,
+   "protein_100": 0.8,
+   "fat_100": 0,
+   "carbs_100": 81.5,
+   "serving_g": 20,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "7949bb76-4370-560f-aace-b34f535eafe8",
+   "owner_id": null,
+   "name": "Шоколад тёмный 70%",
+   "category": "other",
+   "kcal_100": 539,
+   "protein_100": 6.2,
+   "fat_100": 35.4,
+   "carbs_100": 48.2,
+   "serving_g": 25,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "9a69cbc8-6df2-573b-abf7-b94edc91795b",
+   "owner_id": null,
+   "name": "Протеин сывороточный",
+   "category": "other",
+   "kcal_100": 380,
+   "protein_100": 75,
+   "fat_100": 6,
+   "carbs_100": 8,
+   "serving_g": 30,
+   "image_url": null,
+   "external_source": null,
+   "external_id": null,
+   "is_demo": true,
+   "is_published": true,
+   "created_at": "2026-01-01T00:00:00.000Z",
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "achievements": [
+  {
+   "id": "cbf86730-28c1-51ed-adbc-0b31e452e70d",
+   "code": "first_workout",
+   "title": "Первая тренировка",
+   "description": "Завершите первую тренировку",
+   "icon": "flag",
+   "condition_type": "workouts_total",
+   "threshold": 1,
+   "sort_order": 1,
+   "is_demo": true
+  },
+  {
+   "id": "f5dc35da-b232-5c89-a575-9ba25de651a0",
+   "code": "workouts_10",
+   "title": "10 тренировок",
+   "description": "Завершите 10 тренировок",
+   "icon": "barbell",
+   "condition_type": "workouts_total",
+   "threshold": 10,
+   "sort_order": 2,
+   "is_demo": true
+  },
+  {
+   "id": "e5767d92-7ff1-5437-ad11-3c8ad674c162",
+   "code": "workouts_30",
+   "title": "30 тренировок",
+   "description": "Завершите 30 тренировок",
+   "icon": "flame",
+   "condition_type": "workouts_total",
+   "threshold": 30,
+   "sort_order": 3,
+   "is_demo": true
+  },
+  {
+   "id": "dfd98123-8902-5de2-ab61-e9ee6171fd1b",
+   "code": "workouts_100",
+   "title": "100 тренировок",
+   "description": "Завершите 100 тренировок",
+   "icon": "trophy",
+   "condition_type": "workouts_total",
+   "threshold": 100,
+   "sort_order": 4,
+   "is_demo": true
+  },
+  {
+   "id": "533b141a-631f-53a7-a9c0-8eb07a2821cc",
+   "code": "first_pr",
+   "title": "Первый личный рекорд",
+   "description": "Установите личный рекорд в любом упражнении",
+   "icon": "medal",
+   "condition_type": "first_pr",
+   "threshold": 1,
+   "sort_order": 5,
+   "is_demo": true
+  },
+  {
+   "id": "26f68ccd-3eb7-5d6c-a333-5e04304870e9",
+   "code": "streak_7",
+   "title": "7 дней активности",
+   "description": "Тренируйтесь 7 дней подряд",
+   "icon": "calendar",
+   "condition_type": "streak_days",
+   "threshold": 7,
+   "sort_order": 6,
+   "is_demo": true
+  }
+ ],
+ "app_settings": [
+  {
+   "key": "demo_content_notice",
+   "value": {
+    "text": "Каталог содержит демонстрационные упражнения, программы и продукты."
+   },
+   "is_public": true,
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "key": "support_email",
+   "value": {
+    "value": "support@example.com"
+   },
+   "is_public": true,
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "key": "maintenance_mode",
+   "value": {
+    "enabled": false
+   },
+   "is_public": true,
+   "updated_at": "2026-01-01T00:00:00.000Z"
+  }
+ ]
+}
